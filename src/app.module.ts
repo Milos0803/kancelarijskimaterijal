@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
+import { AppController } from './controllers/app.controller';
 import { AppService } from './app.service';
 import {TypeOrmModule} from '@nestjs/typeorm';
 import { DatabaseConfiguration } from 'config/database.configuration';
@@ -16,6 +16,7 @@ import { Feauture } from 'entities/feauture.entity';
 import { Order } from 'entities/order.entity';
 import { Pohoto } from 'entities/photo.entity';
 import { User } from 'entities/user.entity';
+import { AdministratorController } from './controllers/api/administrator.controller';
 
 
 
@@ -50,7 +51,8 @@ import { User } from 'entities/user.entity';
 
 
   ],
-  controllers: [AppController],
+  controllers: [AppController,
+                AdministratorController],
   providers: [AppService,AdministratorService],
 })
 export class AppModule {}
