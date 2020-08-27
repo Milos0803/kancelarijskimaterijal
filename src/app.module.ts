@@ -12,7 +12,6 @@ import { ArticleSize } from 'entities/article.size.entity';
 import { CartArticle } from 'entities/cart.article.entyty';
 import { Cart } from 'entities/cart.entity';
 import { Category } from 'entities/category.entyty';
-import { Feauture } from 'entities/feauture.entity';
 import { Order } from 'entities/order.entity';
 import { Pohoto } from 'entities/photo.entity';
 import { User } from 'entities/user.entity';
@@ -21,6 +20,10 @@ import { CategoryController } from './controllers/api/category.controller';
 import { CategoryService } from './services/category/category.service';
 import { ArticleService } from './services/article/article.service';
 import { ArticleController } from './controllers/api/article.controller';
+import { ArticleFeature } from 'entities/article.feature.entity';
+
+
+
 
 
 
@@ -43,15 +46,21 @@ import { ArticleController } from './controllers/api/article.controller';
         CartArticle,
         Cart,
         Category,
-        Feauture,
         Order,
         Pohoto,
-        User
+        User,
+        ArticleFeature
+        
       
       
       ]
     }),
-    TypeOrmModule.forFeature([ Administrator,Category,Article ])
+    TypeOrmModule.forFeature([ 
+      Administrator,
+      Category,
+      Article,
+      ArticlePrice,
+    ArticleFeature])
 
 
   ],

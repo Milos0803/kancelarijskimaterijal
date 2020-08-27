@@ -13,8 +13,9 @@ import { ArticleColor } from "./article.color.entity";
 import { ArticlePrice } from "./article.price.entity";
 import { ArticleSize } from "./article.size.entity";
 import { CartArticle } from "./cart.article.entyty";
-import { Feauture } from "./feauture.entity";
+
 import { Pohoto } from "./photo.entity";
+import { ArticleFeature } from "./article.feature.entity";
 
 @Index("uq_article_name_category_id", ["name", "categoryId"], { unique: true })
 @Index("fk_article_category_id", ["categoryId"], {})
@@ -32,14 +33,9 @@ export class Article {
   @Column( {type:"varchar",length: 255 })
   excerpt: string;
 
-  @Column( {type:"tinytext" })
+  @Column( {type:"text" })
   description: string;
 
-  @Column( { type:"enum",name: "color", enum: ["Y", "N"] })
-  color: "Y" | "N";
-
-  @Column( { type:"enum", enum: ["Y", "N"] })
-  size: "Y" | "N";
 
   @Column( {type:"timestamp", name: "created_at" })
   createdAt: Date;
@@ -63,8 +59,8 @@ export class Article {
   @OneToOne(() => CartArticle, (cartArticle) => cartArticle.article)
   cartArticle: CartArticle;
 
-  @OneToMany(() => Feauture, (feauture) => feauture.article)
-  feautures: Feauture[];
+  @OneToMany(() => ArticleFeature, (feature) => feature.article)
+  features: ArticleFeature[];
 
   @OneToMany(() => Pohoto, (pohoto) => pohoto.article)
   pohotos: Pohoto[];
