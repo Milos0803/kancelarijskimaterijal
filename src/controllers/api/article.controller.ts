@@ -40,7 +40,7 @@ export class ArticleController{
 constructor(
 public service: ArticleService){}
 
-@Put('createFull')
+@Post('createFull')
 createFullArticle(@Body()data: AddArticleDto){
 return this.service.createFullArticle(data);
 }

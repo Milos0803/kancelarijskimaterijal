@@ -15,18 +15,18 @@ import { Article } from "./article.entity";
 export class ArticlePrice {
   @PrimaryGeneratedColumn({
     type: "int",
-    name: "article_price",
+    name: "article_price_id",
     unsigned: true,
   })
-  articlePrice: number;
+  articlePriceId: number;
 
   @Column({type:"int",  name: "article_id", unsigned: true })
   articleId: number;
 
-  @Column( {type: "decimal",  precision: 10, scale: 2 })
+  @Column( {type: "decimal",unsigned: true,  precision: 10, scale: 2 })
   price: number;
 
-  @Column("timestamp", { name: "created_at" })
+  @Column( {type:"timestamp", name: "created_at" })
   createdAt: Date;
 
   @ManyToOne(() => Article, (article) => article.articlePrices, {
