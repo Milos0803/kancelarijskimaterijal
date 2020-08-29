@@ -70,7 +70,7 @@ import { AuthMiddleware } from './middlewares/auth.middleware';
                 AdministratorController,
                 CategoryController,
                 ArticleController,
-              AuthController],
+             AuthController],
   providers: [
     AppService,
     AdministratorService,
@@ -88,6 +88,6 @@ export class AppModule implements NestModule {
     .apply(AuthMiddleware)
     .exclude('auth/*')
     .forRoutes('api/*');
-  }
+ } 
 
 }
