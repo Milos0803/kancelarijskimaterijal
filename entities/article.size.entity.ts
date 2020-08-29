@@ -18,8 +18,8 @@ export class ArticleSize {
   })
   articleSizeId: number;
 
-  @Column( { type: "enum", enum: ["Y", "N"] })
-  size: "Y" | "N";
+  @Column( { type: "text", })
+  size: string;
 
   @Column( {type:"int", name: "article_id", unique: true, unsigned: true })
   articleId: number;

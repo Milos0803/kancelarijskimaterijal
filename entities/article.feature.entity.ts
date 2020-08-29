@@ -8,12 +8,12 @@ import {
 } from "typeorm";
 import { Article } from "./article.entity";
 
-@Index("uq_feauture_name_article_id", ["name", "articleId"], { unique: true })
-@Index("fk_feauture_article_id", ["articleId"], {})
-@Entity("feauture")
-export class Feauture {
-  @PrimaryGeneratedColumn({ type: "int", name: "feauture_id", unsigned: true })
-  feautureId: number;
+@Index("uq_feature_name_article_id", ["name", "articleId"], { unique: true })
+@Index("fk_feature_article_id", ["articleId"], {})
+@Entity("article_feature")
+export class ArticleFeature {
+  @PrimaryGeneratedColumn({ type: "int", name: "feature_id", unsigned: true })
+  featureId: number;
 
   @Column( {type:"varchar", length: 32 })
   name: string;
@@ -21,7 +21,7 @@ export class Feauture {
   @Column( {type:"int", name: "article_id", unsigned: true })
   articleId: number;
 
-  @ManyToOne(() => Article, (article) => article.feautures, {
+  @ManyToOne(() => Article, (article) => article.features, {
     onDelete: "NO ACTION",
     onUpdate: "CASCADE",
   })

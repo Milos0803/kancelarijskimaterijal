@@ -18,8 +18,8 @@ export class ArticleColor {
   })
   articleColorId: number;
 
-  @Column( { type:"enum", enum: ["Y", "N"] })
-  color: "Y" | "N";
+  @Column( { type:"text",  })
+  color: string;
 
   @Column( { type: "int",name: "article_id", unique: true, unsigned: true })
   articleId: number;
