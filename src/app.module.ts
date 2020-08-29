@@ -21,11 +21,8 @@ import { CategoryService } from './services/category/category.service';
 import { ArticleService } from './services/article/article.service';
 import { ArticleController } from './controllers/api/article.controller';
 import { ArticleFeature } from 'entities/article.feature.entity';
-<<<<<<< HEAD
 import { AuthController } from './controllers/api/auth.controller';
 import { AuthMiddleware } from './middlewares/auth.middleware';
-=======
->>>>>>> 97e8d85106799f0ab61dc2039b89be56c80d5b11
 
 
 
@@ -72,25 +69,18 @@ import { AuthMiddleware } from './middlewares/auth.middleware';
   controllers: [AppController,
                 AdministratorController,
                 CategoryController,
-<<<<<<< HEAD
                 ArticleController,
               AuthController],
-=======
-                ArticleController],
->>>>>>> 97e8d85106799f0ab61dc2039b89be56c80d5b11
   providers: [
     AppService,
     AdministratorService,
     CategoryService,
   ArticleService],
-<<<<<<< HEAD
   
   exports:[
     AdministratorService,
 
   ]
-=======
->>>>>>> 97e8d85106799f0ab61dc2039b89be56c80d5b11
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
