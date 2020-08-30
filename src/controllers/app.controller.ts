@@ -7,13 +7,13 @@ import { AdministratorService } from '../services/administrator/administrator.se
 export class AppController {
   constructor(
     private administratorService: AdministratorService
-  ){}
-  
-  
+  ) { }
+
+
   @Get()
   getIndex(): string {
     return 'Home page';
   }
 
-  
+
 }

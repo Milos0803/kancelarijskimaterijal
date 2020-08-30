@@ -8,7 +8,7 @@ import { AddArticleDto } from "src/dtos/article/add.article.dto";
 @Controller('api/article')
 @Crud({
     model: {
-        type:Article
+        type: Article
     },
     params: {
         id: {
@@ -22,28 +22,28 @@ import { AddArticleDto } from "src/dtos/article/add.article.dto";
             pohotos: {
                 eager: true
             },
-            category:{
-                eager:true
+            category: {
+                eager: true
 
             },
             articlePrices: {
                 eager: true
             },
-            articleColor:{
-                eager:true
+            articleColor: {
+                eager: true
             }
         }
     }
 })
 
-export class ArticleController{
-constructor(
-public service: ArticleService){}
+export class ArticleController {
+    constructor(
+        public service: ArticleService) { }
 
-@Post('createFull')
-createFullArticle(@Body()data: AddArticleDto){
-return this.service.createFullArticle(data);
-}
+    @Post('createFull')
+    createFullArticle(@Body() data: AddArticleDto) {
+        return this.service.createFullArticle(data);
+    }
 
 
 

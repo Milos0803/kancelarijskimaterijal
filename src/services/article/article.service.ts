@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import {TypeOrmCrudService} from "@nestjsx/crud-typeorm"
+import { TypeOrmCrudService } from "@nestjsx/crud-typeorm"
 
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
@@ -11,96 +11,76 @@ import { ArticlePrice } from "entities/article.price.entity";
 import { ArticleFeature } from "entities/article.feature.entity";
 import { Feature } from "@nestjsx/crud";
 import { features } from "process";
+import { ArticleSize } from "entities/article.size.entity";
+import { ArticleColor } from "entities/article.color.entity";
 
 
 @Injectable()
 export class ArticleService extends TypeOrmCrudService<Article>{
-constructor(
-    
-@InjectRepository(Article)
-private readonly article: Repository<Article>,
+    constructor(
 
-@InjectRepository(ArticlePrice)
-private readonly articlePrice: Repository<ArticlePrice>,
+        @InjectRepository(Article)
+        private readonly article: Repository<Article>,
 
-@InjectRepository(ArticleFeature)
-private readonly ArticleFeature: Repository<ArticleFeature>
+        @InjectRepository(ArticlePrice)
+        private readonly articlePrice: Repository<ArticlePrice>,
+
+        @InjectRepository(ArticleFeature)
+        private readonly ArticleFeature: Repository<ArticleFeature>,
+
+        @InjectRepository(ArticleSize)
+        private readonly ArticleSize: Repository<ArticleSize>,
+
+        @InjectRepository(ArticleColor)
+        private readonly ArticleColor: Repository<ArticleColor>
+
+    ) {
+
+        super(article);
+
+    }
 
 
+    async createFullArticle(data: AddArticleDto): Promise<Article | ApiResponse> {
 
-){
+        let newArticle: Article = new Article();
+        newArticle.name = data.name;
+        newArticle.categoryId = data.categoryId;
+        newArticle.excerpt = data.excerpt;
+        newArticle.description = data.description;
 
 
-    super(article);
-    
-}
+        let savedArticle = await this.article.save(newArticle);
 
-
-
-   
-   async createFullArticle( data: AddArticleDto): Promise<Article | ApiResponse>{
-
-    let newArticle: Article = new Article();
-    newArticle.name= data.name;
-    newArticle.categoryId = data.categoryId;
-    newArticle.excerpt = data.excerpt;
-    newArticle.description = data.description;
-    
-    
-   let savedArticle = await this.article.save(newArticle);
-
-    let newArticlePrice: ArticlePrice = new ArticlePrice();
-    
-    newArticlePrice.articleId= savedArticle.articleId;
-    newArticlePrice.price = data.price; 
-    this.articlePrice.save(newArticlePrice);
-    
-
-   /* for( let feature of data.features) {
-        
         let newArticlePrice: ArticlePrice = new ArticlePrice();
+
         newArticlePrice.articleId = savedArticle.articleId;
-    
-        newArticlePrice.price = feature.price;
-        this.articlePrice.save(newArticlePrice);
-        } */
-    
+        newArticlePrice.price = data.price;
+        await this.articlePrice.save(newArticlePrice);
 
-    
-    
+        let newArticleSize: ArticleSize = new ArticleSize();
+        newArticleSize.articleId = savedArticle.articleId;
+        newArticleSize.size = data.size;
+        await this.ArticleSize.save(newArticleSize);
 
-
-
-
-
-    
+        let newArticleColor: ArticleColor = new ArticleColor();
+        newArticleColor.articleId = savedArticle.articleId;
+        newArticleColor.color = data.color;
+        await this.ArticleColor.save(newArticleColor);
 
 
+        return await this.article.findOne(savedArticle.articleId, {
 
-    return await this.article.findOne(savedArticle.articleId,{
-
-        relations: [
-            "articlePrices"
-        ]
-    })
-
+            relations: [
+                "articlePrices",
+                "articleSize",
+                "articleColor"
+            ]
+        })
 
 
 
-
-   
-    
-    
-
-   
-
-    
-
-   }
-
-   
-
-
+    }
 
 
 }

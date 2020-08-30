@@ -37,6 +37,14 @@ createFullArticle(@Body()data: AddCategoryDto){
 return this.service.createCategory(data);
 }
 
+@Post(':id')
+edit(@Param('id') categoryId: number, @Body() data: EditCategoryDto):Promise<EditCategoryDto | ApiResponse>{
+
+        return this.service.editCategory(categoryId, data);
+
+
+}
+
 
 
 }

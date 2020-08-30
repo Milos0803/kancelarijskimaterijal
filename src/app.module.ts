@@ -1,7 +1,7 @@
 import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
 import { AppController } from './controllers/app.controller';
 import { AppService } from './app.service';
-import {TypeOrmModule} from '@nestjs/typeorm';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { DatabaseConfiguration } from 'config/database.configuration';
 import { Administrator } from 'entities/administrator.entity';
 import { AdministratorService } from './services/administrator/administrator.service';
@@ -40,7 +40,7 @@ import { AuthMiddleware } from './middlewares/auth.middleware';
       username: DatabaseConfiguration.username,
       password: DatabaseConfiguration.password,
       database: DatabaseConfiguration.database,
-      entities:[ Administrator,
+      entities: [Administrator,
         ArticleColor,
         Article,
         ArticlePrice,
@@ -52,32 +52,35 @@ import { AuthMiddleware } from './middlewares/auth.middleware';
         Pohoto,
         User,
         ArticleFeature
-        
-      
-      
+
+
+
       ]
     }),
-    TypeOrmModule.forFeature([ 
+    TypeOrmModule.forFeature([
       Administrator,
       Category,
       Article,
       ArticlePrice,
-    ArticleFeature])
+      ArticleFeature,
+      ArticleSize,
+      ArticleColor])
 
 
   ],
   controllers: [AppController,
-                AdministratorController,
-                CategoryController,
-                ArticleController,
-             AuthController],
+    AdministratorController,
+    CategoryController,
+    ArticleController,
+    AuthController],
   providers: [
     AppService,
     AdministratorService,
     CategoryService,
-  ArticleService],
-  
-  exports:[
+    ArticleService
+  ],
+
+  exports: [
     AdministratorService,
 
   ]
@@ -85,9 +88,9 @@ import { AuthMiddleware } from './middlewares/auth.middleware';
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
-    .apply(AuthMiddleware)
-    .exclude('auth/*')
-    .forRoutes('api/*');
- } 
+      .apply(AuthMiddleware)
+      .exclude('auth/*')
+      .forRoutes('api/*');
+  }
 
 }
