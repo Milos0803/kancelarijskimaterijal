@@ -26,7 +26,7 @@ export class ArticlePrice {
   @Column( {type: "decimal",unsigned: true,  precision: 10, scale: 2 })
   price: number;
 
-  @Column( {type:"timestamp", name: "created_at" })
+  @Column( {type:"timestamp", name: "created_at", default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 
   @ManyToOne(() => Article, (article) => article.articlePrices, {

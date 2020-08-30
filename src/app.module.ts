@@ -13,7 +13,7 @@ import { CartArticle } from 'entities/cart.article.entyty';
 import { Cart } from 'entities/cart.entity';
 import { Category } from 'entities/category.entyty';
 import { Order } from 'entities/order.entity';
-import { Pohoto } from 'entities/photo.entity';
+import { Photo } from 'entities/photo.entity';
 import { User } from 'entities/user.entity';
 import { AdministratorController } from './controllers/api/administrator.controller';
 import { CategoryController } from './controllers/api/category.controller';
@@ -23,6 +23,7 @@ import { ArticleController } from './controllers/api/article.controller';
 import { ArticleFeature } from 'entities/article.feature.entity';
 import { AuthController } from './controllers/api/auth.controller';
 import { AuthMiddleware } from './middlewares/auth.middleware';
+import { PhotoService } from './services/photo/photo.service';
 
 
 
@@ -49,7 +50,7 @@ import { AuthMiddleware } from './middlewares/auth.middleware';
         Cart,
         Category,
         Order,
-        Pohoto,
+        Photo,
         User,
         ArticleFeature
 
@@ -59,12 +60,17 @@ import { AuthMiddleware } from './middlewares/auth.middleware';
     }),
     TypeOrmModule.forFeature([
       Administrator,
-      Category,
-      Article,
-      ArticlePrice,
-      ArticleFeature,
-      ArticleSize,
-      ArticleColor])
+        ArticleColor,
+        Article,
+        ArticlePrice,
+        ArticleSize,
+        CartArticle,
+        Cart,
+        Category,
+        Order,
+        Photo,
+        User,
+        ArticleFeature,])
 
 
   ],
@@ -77,7 +83,8 @@ import { AuthMiddleware } from './middlewares/auth.middleware';
     AppService,
     AdministratorService,
     CategoryService,
-    ArticleService
+    ArticleService,
+    PhotoService
   ],
 
   exports: [

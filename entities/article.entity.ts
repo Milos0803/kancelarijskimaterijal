@@ -14,7 +14,7 @@ import { ArticlePrice } from "./article.price.entity";
 import { ArticleSize } from "./article.size.entity";
 import { CartArticle } from "./cart.article.entyty";
 
-import { Pohoto } from "./photo.entity";
+import { Photo } from "./photo.entity";
 import { ArticleFeature } from "./article.feature.entity";
 
 @Index("uq_article_name_category_id", ["name", "categoryId"], { unique: true })
@@ -37,8 +37,8 @@ export class Article {
   description: string;
 
 
-  @Column( {type:"timestamp", name: "created_at" })
-  createdAt: Date;
+  @Column( {type:"timestamp", name: "created_at" , default: () => 'CURRENT_TIMESTAMP'})
+  createdAt: string;
 
   @ManyToOne(() => Category, (category) => category.articles, {
     onDelete: "NO ACTION",
@@ -62,6 +62,6 @@ export class Article {
   @OneToMany(() => ArticleFeature, (feature) => feature.article)
   features: ArticleFeature[];
 
-  @OneToMany(() => Pohoto, (pohoto) => pohoto.article)
-  pohotos: Pohoto[];
+  @OneToMany(() => Photo, (photo) => photo.article)
+  photos: Photo[];
 }

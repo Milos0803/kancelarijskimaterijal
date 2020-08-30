@@ -11,10 +11,10 @@ import { Article } from "./article.entity";
 @Index("uq_photo_article_id_image_path", ["articleId", "imagePath"], {
   unique: true,
 })
-@Entity("pohoto",)
-export class Pohoto {
-  @PrimaryGeneratedColumn({ type: "int", name: "pohoto_id", unsigned: true })
-  pohotoId: number;
+@Entity("photo",)
+export class Photo {
+  @PrimaryGeneratedColumn({ type: "int", name: "photo_id", unsigned: true })
+  photoId: number;
 
   @Column({type:"int",  name: "article_id", unsigned: true })
   articleId: number;
@@ -22,7 +22,7 @@ export class Pohoto {
   @Column({ type:"varchar", name: "image_path", length: 255 })
   imagePath: string;
 
-  @ManyToOne(() => Article, (article) => article.pohotos, {
+  @ManyToOne(() => Article, (article) => article.photos, {
     onDelete: "NO ACTION",
     onUpdate: "CASCADE",
   })
