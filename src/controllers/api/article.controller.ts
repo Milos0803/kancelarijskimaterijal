@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Put, Param, UseInterceptors, UploadedFile, Req } from "@nestjs/common";
+import { Controller, Post, Body, Put, Param, UseInterceptors, UploadedFile, Req, UploadedFiles } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
 import { diskStorage } from "multer";
 import { Article } from "entities/article.entity";
@@ -43,7 +43,7 @@ import { ApiResponse } from "src/misc/api.response.class";
 export class ArticleController {
     constructor(
         public service: ArticleService,
-        public photoService: PhotoService) { }
+        public photoService: PhotoService,) { }
 
     @Post('createFull')
     createFullArticle(@Body() data: AddArticleDto) {
@@ -60,11 +60,11 @@ export class ArticleController {
 
                     let original: string = file.originalname;
                     let normalized = original.replace(/\s+/g, '-');
-                    let sada = new Date();
-                    let datePart = '';
-                    datePart += sada.getFullYear().toString;
-                    datePart += (sada.getMonth() + 1).toString;
-                    datePart += sada.getDate().toString;
+                    const sada = new Date();
+                    let datePart: string = '';
+                    datePart += sada.getFullYear().toString();
+                    datePart += (sada.getMonth() + 1).toString();
+                    datePart += sada.getDate().toString();
                     let randomPart: string =
                         new Array(10)
                             .fill(0)
@@ -77,38 +77,34 @@ export class ArticleController {
                 }
             }),
             fileFilter: (req, file, callback) => {
-               if(!file.originalname.match(/\.(jpg|png)$/)) {
-                   callback(new Error('Bad file extensions.'), false);
-                   return;
-               }   
-               
-               if(!file.mimetype.includes('jpeg')|| file.mimetype.includes('png')){
-                callback(new Error('Bad file content.'), false);
-                return;
-               }
+                if (!file.originalname.match(/\.(jpg|png)$/)) {
+                    callback(new Error('Bad file extensions!'), false );
+                    return;
+                }
 
-               callback(null,true);
+                if (!(file.mimetype.includes('jpeg') || file.mimetype.includes('png'))) {
+                    callback(new Error('Bad file content.'), false);
+                    return;
+                }
+
+                callback(null, true);
             },
             limits: {
-                files: 1 , 
+                files: 1,
                 fieldSize: StorageConfig.photoMaxFileSize,
 
             }
-    
+
         })
 
     )
-    async uploadPhoto(@Param('id') articleId: number, @UploadedFile() photo, @Req() req ): Promise<ApiResponse | Photo> {
-        let imagePath = photo.filename;
-
+    async uploadPhoto(@Param('id') articleId: number, @UploadedFile() photo): Promise<ApiResponse | Photo> {
         const newPhoto: Photo = new Photo();
         newPhoto.articleId = articleId;
-        
         newPhoto.imagePath = photo.filename;
 
 
         const savedPhoto = await this.photoService.add(newPhoto);
-
         if (!savedPhoto) {
             return new ApiResponse('error', -4001);
 

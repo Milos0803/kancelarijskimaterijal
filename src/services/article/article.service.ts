@@ -13,6 +13,7 @@ import { Feature } from "@nestjsx/crud";
 import { features } from "process";
 import { ArticleSize } from "entities/article.size.entity";
 import { ArticleColor } from "entities/article.color.entity";
+import { Photo } from "entities/photo.entity";
 
 
 @Injectable()
@@ -30,6 +31,9 @@ export class ArticleService extends TypeOrmCrudService<Article>{
 
         @InjectRepository(ArticleSize)
         private readonly ArticleSize: Repository<ArticleSize>,
+
+        @InjectRepository(Photo)
+        private readonly photo: Repository<Photo>,
 
         @InjectRepository(ArticleColor)
         private readonly ArticleColor: Repository<ArticleColor>
@@ -67,6 +71,7 @@ export class ArticleService extends TypeOrmCrudService<Article>{
         newArticleColor.articleId = savedArticle.articleId;
         newArticleColor.color = data.color;
         await this.ArticleColor.save(newArticleColor);
+        
 
 
         return await this.article.findOne(savedArticle.articleId, {
@@ -74,7 +79,8 @@ export class ArticleService extends TypeOrmCrudService<Article>{
             relations: [
                 "articlePrices",
                 "articleSize",
-                "articleColor"
+                "articleColor",
+                "photos",
             ]
         })
 

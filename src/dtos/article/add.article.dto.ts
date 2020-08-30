@@ -7,6 +7,7 @@ export class AddArticleDto{
     price: number;
     size: string;
     color: string;
+    imagePath:string;
 
     
     
