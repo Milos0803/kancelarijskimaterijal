@@ -114,13 +114,13 @@ export class ArticleController {
         }
 
         const fileTypeResult = await fileType.fromFile(photo.path);
-        if(!fileTypeResult){
+        if (!fileTypeResult) {
             fs.unlinkSync(photo.path);
             return new ApiResponse('error', -4002, 'Cannot detect file type!');
         }
 
         const realMimeType = fileTypeResult.mime;
-        if(!(realMimeType.includes('jpeg') || realMimeType.includes('png'))){
+        if (!(realMimeType.includes('jpeg') || realMimeType.includes('png'))) {
             fs.unlinkSync(photo.path);
             return new ApiResponse('error', -4002, 'Bad file content type!');
         }
@@ -142,28 +142,28 @@ export class ArticleController {
         return savedPhoto;
     }
 
-    async createThumb(photo){
+    async createThumb(photo) {
         const originalFilePath = photo.path;
         const fileName = photo.filename;
 
         const destinationFilePath = StorageConfig.photoDestination + "/thumb/" + fileName;
 
         await sharp(originalFilePath)
-        .resize({
-            fit: 'cover',
-            width: StorageConfig.photoThubmSize.width,
-            height: StorageConfig.photoThubmSize.height,
-            background:{
-                r: 255 , g:255 , b:255, alpha: 0.0
-            }
+            .resize({
+                fit: 'cover',
+                width: StorageConfig.photoThubmSize.width,
+                height: StorageConfig.photoThubmSize.height,
+                background: {
+                    r: 255, g: 255, b: 255, alpha: 0.0
+                }
 
-        })
-        .toFile(destinationFilePath);
+            })
+            .toFile(destinationFilePath);
 
 
     }
 
-    async createSmallImage(photo){
+    async createSmallImage(photo) {
 
 
         const originalFilePath = photo.path;
@@ -172,18 +172,18 @@ export class ArticleController {
         const destinationFilePath = StorageConfig.photoDestination + "/small/" + fileName;
 
         await sharp(originalFilePath)
-        .resize({
-            fit: 'cover',
-            width: StorageConfig.photoSmallSize.width,
-            height: StorageConfig.photoSmallSize.height,
-            background:{
-                r: 255 , g:255 , b:255, alpha: 0.0
-            }
+            .resize({
+                fit: 'cover',
+                width: StorageConfig.photoSmallSize.width,
+                height: StorageConfig.photoSmallSize.height,
+                background: {
+                    r: 255, g: 255, b: 255, alpha: 0.0
+                }
 
 
-        })
-        .toFile(destinationFilePath);
-        
+            })
+            .toFile(destinationFilePath);
+
     }
 
 }
