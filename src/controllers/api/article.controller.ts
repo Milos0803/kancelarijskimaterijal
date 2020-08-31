@@ -1,13 +1,13 @@
 import { Controller, Post, Body, Put, Param, UseInterceptors, UploadedFile, Req, UploadedFiles } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
 import { diskStorage } from "multer";
-import { Article } from "entities/article.entity";
+import { Article } from "src/entities/article.entity";
 import { ArticleService } from "src/services/article/article.service";
 import { AddArticleDto } from "src/dtos/article/add.article.dto";
 import { FileInterceptor } from '@nestjs/platform-express';
 import { StorageConfig } from "config/storage.config";
 import { PhotoService } from "src/services/photo/photo.service";
-import { Photo } from "entities/photo.entity";
+import { Photo } from "src/entities/photo.entity";
 import { ApiResponse } from "src/misc/api.response.class";
 import * as fileType from 'file-type';
 import * as fs from 'fs';
@@ -57,7 +57,7 @@ export class ArticleController {
     @UseInterceptors(
         FileInterceptor('photo', {
             storage: diskStorage({
-                destination: StorageConfig.photoDestination,
+                destination: StorageConfig.photo.destination,
                 filename: (req, file, callback) => {
 
 
@@ -96,7 +96,7 @@ export class ArticleController {
             },
             limits: {
                 files: 1,
-                fieldSize: StorageConfig.photoMaxFileSize,
+                fieldSize: StorageConfig.photo.maxSize,
 
             }
 
@@ -125,10 +125,8 @@ export class ArticleController {
             return new ApiResponse('error', -4002, 'Bad file content type!');
         }
 
-        await this.createThumb(photo);
-        await this.createSmallImage(photo);
-
-
+        await this.createrResizedImage(photo, StorageConfig.photo.resize.thumb);
+        await this.createrResizedImage(photo, StorageConfig.photo.resize.small);
         const newPhoto: Photo = new Photo();
         newPhoto.articleId = articleId;
         newPhoto.imagePath = photo.filename;
@@ -142,48 +140,24 @@ export class ArticleController {
         return savedPhoto;
     }
 
-    async createThumb(photo) {
+    async createrResizedImage(photo, resizeSettings) {
         const originalFilePath = photo.path;
         const fileName = photo.filename;
 
-        const destinationFilePath = StorageConfig.photoDestination + "/thumb/" + fileName;
+        const destinationFilePath = StorageConfig.photo.destination
+            + resizeSettings.small.directory
+            + fileName;
 
         await sharp(originalFilePath)
             .resize({
                 fit: 'cover',
-                width: StorageConfig.photoThubmSize.width,
-                height: StorageConfig.photoThubmSize.height,
-                background: {
-                    r: 255, g: 255, b: 255, alpha: 0.0
-                }
+                width: resizeSettings.small.width,
+                height: resizeSettings.photo.resize.small.height,
 
-            })
-            .toFile(destinationFilePath);
-
-
-    }
-
-    async createSmallImage(photo) {
-
-
-        const originalFilePath = photo.path;
-        const fileName = photo.filename;
-
-        const destinationFilePath = StorageConfig.photoDestination + "/small/" + fileName;
-
-        await sharp(originalFilePath)
-            .resize({
-                fit: 'cover',
-                width: StorageConfig.photoSmallSize.width,
-                height: StorageConfig.photoSmallSize.height,
-                background: {
-                    r: 255, g: 255, b: 255, alpha: 0.0
-                }
 
 
             })
             .toFile(destinationFilePath);
-
     }
 
 }

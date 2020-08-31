@@ -3,17 +3,17 @@ import { TypeOrmCrudService } from "@nestjsx/crud-typeorm"
 
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { Article } from "entities/article.entity";
+import { Article } from "src/entities/article.entity";
 import { AddArticleDto } from "src/dtos/article/add.article.dto";
 import { ApiResponse } from "src/misc/api.response.class";
-import { ArticlePrice } from "entities/article.price.entity";
+import { ArticlePrice } from "src/entities/article.price.entity";
 
-import { ArticleFeature } from "entities/article.feature.entity";
+import { ArticleFeature } from "src/entities/article.feature.entity";
 import { Feature } from "@nestjsx/crud";
 import { features } from "process";
-import { ArticleSize } from "entities/article.size.entity";
-import { ArticleColor } from "entities/article.color.entity";
-import { Photo } from "entities/photo.entity";
+import { ArticleSize } from "src/entities/article.size.entity";
+import { ArticleColor } from "src/entities/article.color.entity";
+import { Photo } from "src/entities/photo.entity";
 
 
 @Injectable()

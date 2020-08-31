@@ -1,6 +1,6 @@
 import { Controller, Post, Body, Param, Put, Patch } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
-import { Category } from "entities/category.entyty";
+import { Category } from "src/entities/category.entyty";
 import { CategoryService } from "src/services/category/category.service";
 import { AddCategoryDto } from "src/dtos/category/add.category.dto";
 import { EditCategoryDto } from "src/dtos/category/edit.category.dto";

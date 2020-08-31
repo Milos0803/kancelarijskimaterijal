@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { TypeOrmCrudService } from "@nestjsx/crud-typeorm"
-import { Category } from "entities/category.entyty";
+import { Category } from "src/entities/category.entyty";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { AddCategoryDto } from "src/dtos/category/add.category.dto";
