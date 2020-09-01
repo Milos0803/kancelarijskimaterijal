@@ -24,6 +24,7 @@ import { ArticleFeature } from 'src/entities/article.feature.entity';
 import { AuthController } from './controllers/api/auth.controller';
 import { AuthMiddleware } from './middlewares/auth.middleware';
 import { PhotoService } from './services/photo/photo.service';
+import { UserService } from './services/user/user.service';
 
 
 
@@ -85,6 +86,7 @@ import { PhotoService } from './services/photo/photo.service';
     CategoryService,
     ArticleService,
     PhotoService,
+    UserService
   ],
 
   exports: [

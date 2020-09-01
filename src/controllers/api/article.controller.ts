@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Put, Param, UseInterceptors, UploadedFile, Req, UploadedFiles, Delete } from "@nestjs/common";
+import { Controller, Post, Body, Put, Param, UseInterceptors, UploadedFile, Req, UploadedFiles, Delete, Patch } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
 import { diskStorage } from "multer";
 import { Article } from "src/entities/article.entity";
@@ -12,6 +12,7 @@ import { ApiResponse } from "src/misc/api.response.class";
 import * as fileType from 'file-type';
 import * as fs from 'fs';
 import * as sharp from 'sharp';
+import { EditArticleDto } from "src/dtos/article/edit.article.dto";
 @Controller('api/article')
 @Crud({
     model: {
@@ -40,6 +41,9 @@ import * as sharp from 'sharp';
                 eager: true
             }
         }
+    },
+    routes: {
+        exclude: ['updateOneBase','replaceOneBase', 'deleteOneBase'],
     }
 })
 
@@ -51,6 +55,12 @@ export class ArticleController {
     @Post('createFull')
     createFullArticle(@Body() data: AddArticleDto) {
         return this.service.createFullArticle(data);
+    }
+
+     @Patch(':id')
+     editFullArticle(@Param('id') id: number, @Body() data: EditArticleDto){
+            return this.service.editFullArticle(id, data);
+
     }
 
     @Post(':id/uploadPhoto/')
@@ -136,12 +146,14 @@ export class ArticleController {
 
 
         const savedPhoto = await this.photoService.add(newPhoto);
-       // if (!savedPhoto) {
-        //    return new ApiResponse('error', -4001);
-        return savedPhoto;
+        if (!savedPhoto) {
+          return new ApiResponse('error', -4001);
+       
         
         
     }
+    return savedPhoto;
+}
 
     async createResizedImage(photo, resizeSettings) {
         const originalFilePath = photo.destination;
@@ -162,7 +174,7 @@ export class ArticleController {
             })
             .toFile(destinationFilePath);
     }
-    @Delete(':articleId/deletePhoto/:photoId')
+    @Delete(':articleId/deletePhoto/:photoId/')
     public async deletePhoto(
         @Param('articleId') articleId: number,
         @Param('photoId') photoId: number,) {
@@ -176,6 +188,7 @@ export class ArticleController {
                 return new ApiResponse('error' , -4004, 'Photo not found!');
 
             }
+            try{
             fs.unlinkSync(StorageConfig.photo.destination + photo.imagePath);
             fs.unlinkSync(StorageConfig.photo.destination 
                 + StorageConfig.photo.resize.thumb 
@@ -183,6 +196,10 @@ export class ArticleController {
                 fs.unlinkSync(StorageConfig.photo.destination 
                     + StorageConfig.photo.resize.small 
                     + photo.imagePath);
+                } catch (e){
+
+
+                }
 
 
                    const deleteResult =  await this.photoService.deleteById(photoId);

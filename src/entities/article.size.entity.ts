@@ -8,7 +8,7 @@ import {
 } from "typeorm";
 import { Article } from "./article.entity";
 
-@Index("uq_article_size_article_id", ["articleId"], { unique: true })
+@Index("uq_article_size_article_id", ["articleId" , "size"], { unique: true })
 @Entity("article_size")
 export class ArticleSize {
   @PrimaryGeneratedColumn({
@@ -21,7 +21,7 @@ export class ArticleSize {
   @Column( { type: "text", })
   size: string;
 
-  @Column( {type:"int", name: "article_id", unique: true, unsigned: true })
+  @Column( {type:"int", name: "article_id",  unsigned: true })
   articleId: number;
 
   @OneToOne(() => Article, (article) => article.articleSize, {

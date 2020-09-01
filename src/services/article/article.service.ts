@@ -14,6 +14,7 @@ import { features } from "process";
 import { ArticleSize } from "src/entities/article.size.entity";
 import { ArticleColor } from "src/entities/article.color.entity";
 import { Photo } from "src/entities/photo.entity";
+import { EditArticleDto } from "src/dtos/article/edit.article.dto";
 
 
 @Injectable()
@@ -71,7 +72,7 @@ export class ArticleService extends TypeOrmCrudService<Article>{
         newArticleColor.articleId = savedArticle.articleId;
         newArticleColor.color = data.color;
         await this.ArticleColor.save(newArticleColor);
-        
+
 
 
         return await this.article.findOne(savedArticle.articleId, {
@@ -87,7 +88,65 @@ export class ArticleService extends TypeOrmCrudService<Article>{
 
 
     }
+    async editFullArticle(articleId: number, data: EditArticleDto): Promise<Article | ApiResponse> {
+        const postojeciArtikal: Article = await this.article.findOne(articleId,{
+            relations: ['articlePrices', 'articleSize', 'articleColor']
+        });
+        if (!postojeciArtikal) {
+            return new ApiResponse('error', -5001, 'Article not found');
+
+        }
+
+
+        postojeciArtikal.name = data.name;
+        postojeciArtikal.categoryId = data.categoryId;
+        postojeciArtikal.excerpt = data.excerpt;
+        postojeciArtikal.description = data.description;
+        
+        
+        const savedArticle = await this.article.save(postojeciArtikal);
+        if (!savedArticle){
+            return new ApiResponse('error', -5002, 'Article not updated'); 
+        }
+
+        const newPrice: string = Number(data.price).toFixed(2);
+        const lastPrice = postojeciArtikal.articlePrices[postojeciArtikal.articlePrices.length-1].price;
+        const lastPriceString: string = Number(lastPrice).toFixed(2);
+
+        if(newPrice !==  lastPriceString){
+           const newArticlePrice = new ArticlePrice();
+            newArticlePrice.articleId = articleId;
+            newArticlePrice.price = data.price;
+           const savedArticlePrice = await this.articlePrice.save(newArticlePrice);
+            if(!savedArticlePrice){
+                return new ApiResponse('error', -5003, 'Price not updated'); 
+            }
+            const newArticleSize = new ArticleSize();
+            newArticleSize.articleId = articleId ;
+            newArticleSize.size = data.size;
+    
+           const newArticleSizeSave = await this.ArticleSize.save(newArticleSize);
+           if(!newArticleSizeSave){
+            return new ApiResponse('error', -5003, 'Price not updated'); 
+        }
+
+
+
+
+
+       }
+       
+       
+
+      
+       
+    
+    }
+    
+
+    
 
 
 }
+
 
