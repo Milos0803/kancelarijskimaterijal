@@ -84,7 +84,7 @@ import { PhotoService } from './services/photo/photo.service';
     AdministratorService,
     CategoryService,
     ArticleService,
-    PhotoService
+    PhotoService,
   ],
 
   exports: [

@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Put, Param, UseInterceptors, UploadedFile, Req, UploadedFiles } from "@nestjs/common";
+import { Controller, Post, Body, Put, Param, UseInterceptors, UploadedFile, Req, UploadedFiles, Delete } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
 import { diskStorage } from "multer";
 import { Article } from "src/entities/article.entity";
@@ -63,6 +63,7 @@ export class ArticleController {
 
                     let original: string = file.originalname;
                     let normalized = original.replace(/\s+/g, '-');
+                    normalized = normalized.replace(/[^A-z0-9\.\-]/g, '');
                     const sada = new Date();
                     let datePart: string = '';
                     datePart += sada.getFullYear().toString();
@@ -80,7 +81,7 @@ export class ArticleController {
                 }
             }),
             fileFilter: (req, file, callback) => {
-                if (!file.originalname.match(/\.(jpg|png)$/)) {
+                if (!file.originalname.toLowerCase().match(/\.(jpg|png)$/)) {
                     req.fileFilterError = 'Bad file extension!';
                     callback(null, false);
                     return;
@@ -96,14 +97,16 @@ export class ArticleController {
             },
             limits: {
                 files: 1,
-                fieldSize: StorageConfig.photo.maxSize,
+                fileSize: StorageConfig.photo.maxSize,
 
-            }
+            },
 
         })
 
     )
-    async uploadPhoto(@Param('id') articleId: number, @UploadedFile() photo,
+    async uploadPhoto(
+        @Param('id') articleId: number, 
+        @UploadedFile() photo,
         @Req() req
     ): Promise<ApiResponse | Photo> {
         if (req.fileFilterError) {
@@ -125,39 +128,70 @@ export class ArticleController {
             return new ApiResponse('error', -4002, 'Bad file content type!');
         }
 
-        await this.createrResizedImage(photo, StorageConfig.photo.resize.thumb);
-        await this.createrResizedImage(photo, StorageConfig.photo.resize.small);
+          await this.createResizedImage(photo, StorageConfig.photo.resize.thumb);
+          await this.createResizedImage(photo, StorageConfig.photo.resize.small);
         const newPhoto: Photo = new Photo();
         newPhoto.articleId = articleId;
         newPhoto.imagePath = photo.filename;
 
 
         const savedPhoto = await this.photoService.add(newPhoto);
-        if (!savedPhoto) {
-            return new ApiResponse('error', -4001);
-
-        }
+       // if (!savedPhoto) {
+        //    return new ApiResponse('error', -4001);
         return savedPhoto;
+        
+        
     }
 
-    async createrResizedImage(photo, resizeSettings) {
-        const originalFilePath = photo.path;
+    async createResizedImage(photo, resizeSettings) {
+        const originalFilePath = photo.destination;
         const fileName = photo.filename;
 
-        const destinationFilePath = StorageConfig.photo.destination
-            + resizeSettings.small.directory
-            + fileName;
+        const destinationFilePath = StorageConfig.photo.destination +
+                                    resizeSettings.directory+
+                                    fileName;
 
         await sharp(originalFilePath)
             .resize({
                 fit: 'cover',
-                width: resizeSettings.small.width,
-                height: resizeSettings.photo.resize.small.height,
+                width: resizeSettings.width,
+                height: resizeSettings.height,
 
 
 
             })
             .toFile(destinationFilePath);
+    }
+    @Delete(':articleId/deletePhoto/:photoId')
+    public async deletePhoto(
+        @Param('articleId') articleId: number,
+        @Param('photoId') photoId: number,) {
+
+            const photo = await this.photoService.findOne({
+                articleId: articleId ,
+                photoId : photoId
+            });
+
+            if(!photo){
+                return new ApiResponse('error' , -4004, 'Photo not found!');
+
+            }
+            fs.unlinkSync(StorageConfig.photo.destination + photo.imagePath);
+            fs.unlinkSync(StorageConfig.photo.destination 
+                + StorageConfig.photo.resize.thumb 
+                + photo.imagePath);
+                fs.unlinkSync(StorageConfig.photo.destination 
+                    + StorageConfig.photo.resize.small 
+                    + photo.imagePath);
+
+
+                   const deleteResult =  await this.photoService.deleteById(photoId);
+                    if(deleteResult.affected=== 0){
+                        return new ApiResponse('error' , -4004, 'Photo not found!');
+                    }
+
+                    return new ApiResponse('ok' , 0, 'One photo deleted.');
+
     }
 
 }
