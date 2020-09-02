@@ -27,7 +27,52 @@ import { RoleCheckerGuard } from "src/misc/role.checker.guard";
             }
 
         }
-    }
+    },
+    routes: {
+      only: [
+          "createOneBase",
+          "createManyBase",
+          "getManyBase",
+          "getOneBase",
+          "updateOneBase",
+      ],
+      createOneBase: {
+        decorators: [
+            UseGuards(RoleCheckerGuard),
+            AllowToRoles('administrator'),
+        ],
+
+      },
+      createManyBase: {
+        decorators: [
+            UseGuards(RoleCheckerGuard),
+            AllowToRoles('administrator'),
+        ],
+
+      },
+      getManyBase: {
+        decorators:[
+        UseGuards(RoleCheckerGuard),
+        AllowToRoles('administrator', 'user'),
+      ],
+
+      },
+      getOneBase: {
+        decorators:[
+            UseGuards(RoleCheckerGuard),
+            AllowToRoles('administrator', 'user'),
+          ],
+      },
+      updateOneBase:{
+        decorators: [
+            UseGuards(RoleCheckerGuard),
+            AllowToRoles('administrator'),
+        ],
+      },
+
+     
+
+    },
 })
 
 export class CategoryController{
@@ -35,7 +80,7 @@ constructor(
 public service: CategoryService){}
 
 @Post('createCategory')
-createFullArticle(@Body()data: AddCategoryDto){
+createFullCategory(@Body()data: AddCategoryDto){
 return this.service.createCategory(data);
 }
 
