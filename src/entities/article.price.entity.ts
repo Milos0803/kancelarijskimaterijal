@@ -7,6 +7,7 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { Article } from "./article.entity";
+import * as Validator from 'class-validator';
 
 @Index("uq_article_price_article_id_price", ["articleId", "price"], {
   unique: true,
@@ -24,6 +25,15 @@ export class ArticlePrice {
   articleId: number;
 
   @Column( {type: "decimal",unsigned: true,  precision: 10, scale: 2 })
+ @Validator.IsNotEmpty()
+ @Validator.IsPositive()
+ @Validator.IsNumber({
+   allowInfinity: false,
+   allowNaN: false,
+   maxDecimalPlaces: 2,
+
+ })
+
   price: number;
 
   @Column( {type:"timestamp", name: "created_at", default: () => 'CURRENT_TIMESTAMP' })

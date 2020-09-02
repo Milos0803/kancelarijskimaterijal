@@ -1,19 +1,43 @@
-export class AddArticleDto{
+import * as Validator from 'class-validator';
 
+export class AddArticleDto {
+    @Validator.IsNotEmpty()
+    @Validator.IsString()
+    @Validator.Length(5, 128)
     name: string;
+
+
     categoryId: number;
+
+
+
+    @Validator.IsNotEmpty()
+    @Validator.IsString()
+    @Validator.Length(10, 255)
     excerpt: string;
-    description:string;
+
+
+    @Validator.IsNotEmpty()
+    @Validator.IsString()
+    @Validator.Length(64, 10000)
+    description: string;
+
+    @Validator.IsNotEmpty()
+    @Validator.IsPositive()
+    @Validator.IsNumber({
+   allowInfinity: false,
+   allowNaN: false,
+   maxDecimalPlaces: 2,})
     price: number;
     size: string;
     color: string;
-    imagePath:string;
+    imagePath: string;
 
-    
-    
-    
-    
 
-    
+
+
+
+
+
 
 }

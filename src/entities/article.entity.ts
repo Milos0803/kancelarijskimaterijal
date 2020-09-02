@@ -13,7 +13,7 @@ import { ArticleColor } from "./article.color.entity";
 import { ArticlePrice } from "./article.price.entity";
 import { ArticleSize } from "./article.size.entity";
 import { CartArticle } from "./cart.article.entyty";
-
+import * as Validator from 'class-validator';
 import { Photo } from "./photo.entity";
 import { ArticleFeature } from "./article.feature.entity";
 
@@ -25,15 +25,25 @@ export class Article {
   articleId: number;
 
   @Column( {type:"varchar" , length: 128 })
+  @Validator.IsNotEmpty()
+  @Validator.IsString()
+  @Validator.Length(5,80)
+
   name: string;
 
   @Column( { type: "int", name: "category_id", unsigned: true })
   categoryId: number;
 
   @Column( {type:"varchar",length: 255 })
+  @Validator.IsNotEmpty()
+  @Validator.IsString()
+  @Validator.Length(10,255)
   excerpt: string;
 
   @Column( {type:"text" })
+  @Validator.IsNotEmpty()
+  @Validator.IsString()
+  @Validator.Length(64 ,10000)
   description: string;
 
 
