@@ -25,6 +25,9 @@ import { AuthController } from './controllers/api/auth.controller';
 import { AuthMiddleware } from './middlewares/auth.middleware';
 import { PhotoService } from './services/photo/photo.service';
 import { UserService } from './services/user/user.service';
+import { CartService } from './services/cart/cart.service';
+import { UserCartController } from './controllers/api/user.cart.controller';
+import { OrderService } from './services/order/order.service';
 
 
 
@@ -79,14 +82,17 @@ import { UserService } from './services/user/user.service';
     AdministratorController,
     CategoryController,
     ArticleController,
-    AuthController],
+    AuthController,
+    UserCartController],
   providers: [
     AppService,
     AdministratorService,
     CategoryService,
     ArticleService,
     PhotoService,
-    UserService
+    UserService,
+    CartService,
+    OrderService
   ],
 
   exports: [

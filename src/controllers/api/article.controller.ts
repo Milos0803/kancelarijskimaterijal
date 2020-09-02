@@ -147,8 +147,8 @@ export class ArticleController {
         @UploadedFile() photo,
         @Req() req
     ): Promise<ApiResponse | Photo> {
-        if (!req.fileFilterError) {
-            return new ApiResponse('error', -4002, req.fileFilterError);
+        if (req.fileFilterError) {
+            return  new ApiResponse('error', -4002, req.fileFilterError);
         }
         if (!photo) {
             return new ApiResponse('error', -4002, 'File not uploaded!');
@@ -191,13 +191,11 @@ export class ArticleController {
             resizeSettings.directory +
             fileName;
 
-        await sharp(originalFilePath)
+        await sharp(originalFilePath + fileName)
             .resize({
                 fit: 'cover',
                 width: resizeSettings.width,
                 height: resizeSettings.height,
-
-
 
             })
             .toFile(destinationFilePath);
