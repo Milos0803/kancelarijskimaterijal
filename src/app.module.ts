@@ -91,6 +91,7 @@ import { UserService } from './services/user/user.service';
 
   exports: [
     AdministratorService,
+    UserService,
 
   ]
 })
