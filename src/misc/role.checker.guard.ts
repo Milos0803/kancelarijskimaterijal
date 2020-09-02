@@ -12,7 +12,7 @@ export class RoleCheckerGuard implements CanActivate {
 
     canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
 
-        const req: Request = context.switchToHttp().getRequest();
+        const req: any = context.switchToHttp().getRequest();
        const role =  req.token.role;
 
         const allowedToRoles = this

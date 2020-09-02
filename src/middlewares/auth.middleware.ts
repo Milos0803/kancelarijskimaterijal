@@ -6,6 +6,8 @@ import { JwtDataDto } from "src/dtos/auth/jwt.data.dto";
 import { jwtSecret } from "config/jwt.secret";
 import { UserService } from "src/services/user/user.service";
 
+import { Logger } from '@nestjs/common';
+
 @Injectable()
 export class AuthMiddleware implements NestMiddleware {
 
@@ -13,7 +15,6 @@ export class AuthMiddleware implements NestMiddleware {
                 public userService: UserService,
         ) { }
     async use(req: Request, res: Response, next: NextFunction) {
-
 
         if (!req.headers.authorization) {
             throw new HttpException('Token not found', HttpStatus.UNAUTHORIZED);
@@ -29,11 +30,11 @@ export class AuthMiddleware implements NestMiddleware {
         const tokenString = tokenParts[1];
 
 
-        let jwtData: JwtDataDto; 
+        let jwtData: any;
         try{
-        jwtData = jwt.verify(tokenString, jwtSecret);
-        }catch (e){
-            throw new HttpException('Token not found', HttpStatus.UNAUTHORIZED); 
+            jwtData = jwt.verify(tokenString, jwtSecret);
+        } catch (e){
+            throw new HttpException('Token not found', HttpStatus.UNAUTHORIZED);
         }
         if (!jwtData) {
             throw new HttpException('Token not found', HttpStatus.UNAUTHORIZED);
@@ -49,27 +50,25 @@ export class AuthMiddleware implements NestMiddleware {
         }
 
         if(jwtData.role === "administrator"){
-        const administrator = await this.administratorService.getById(jwtData.id);
-        if (!administrator) {
-            throw new HttpException('Account not found', HttpStatus.UNAUTHORIZED);
-        }
-    } else if(jwtData.role === "user"){
-        const user = await this.userService.getById(jwtData.id);
-        if (!user) {
-            throw new HttpException('Account not found', HttpStatus.UNAUTHORIZED);
+            const administrator = await this.administratorService.getById(jwtData.id);
+            if (!administrator) {
+                throw new HttpException('Account not found', HttpStatus.UNAUTHORIZED);
+            }
+            req.token = jwtData;
+            next();
+        } else if(jwtData.role === "user"){
+            const user = await this.userService.getById(jwtData.id);
+            if (!user) {
+                throw new HttpException('Account not found', HttpStatus.UNAUTHORIZED);
+            }
 
-    }
+            const trenutniTimestamp = new Date().getTime() / 1000;
+            if (trenutniTimestamp >= jwtData.exp) {
+                throw new HttpException('Account not found', HttpStatus.UNAUTHORIZED);
+            }
 
-
-        const trenutniTimestamp = new Date().getTime() / 1000;
-        if (trenutniTimestamp >= jwtData.exp) {
-            throw new HttpException('Account not found', HttpStatus.UNAUTHORIZED);
-        }
-
-        req.token = jwtData;
-
-
-        next();
+            req.token = jwtData;
+            next();
     }
 
 

@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Put, Param, UseInterceptors, UploadedFile, Req, UploadedFiles, Delete, Patch, UseGuards } from "@nestjs/common";
+import { Controller, Post, Body, Put, Param, UseInterceptors, UploadedFile, Req, Delete, Patch, UseGuards } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
 import { diskStorage } from "multer";
 import { Article } from "src/entities/article.entity";
