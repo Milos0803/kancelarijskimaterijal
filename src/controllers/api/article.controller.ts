@@ -147,7 +147,7 @@ export class ArticleController {
         @UploadedFile() photo,
         @Req() req
     ): Promise<ApiResponse | Photo> {
-        if (req.fileFilterError) {
+        if (!req.fileFilterError) {
             return new ApiResponse('error', -4002, req.fileFilterError);
         }
         if (!photo) {
