@@ -66,6 +66,8 @@ export class AuthMiddleware implements NestMiddleware {
             throw new HttpException('Account not found', HttpStatus.UNAUTHORIZED);
         }
 
+        req.token = jwtData;
+
 
         next();
     }

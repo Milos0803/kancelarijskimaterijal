@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Put, Param, UseInterceptors, UploadedFile, Req, UploadedFiles, Delete, Patch } from "@nestjs/common";
+import { Controller, Post, Body, Put, Param, UseInterceptors, UploadedFile, Req, UploadedFiles, Delete, Patch, UseGuards } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
 import { diskStorage } from "multer";
 import { Article } from "src/entities/article.entity";
@@ -13,6 +13,8 @@ import * as fileType from 'file-type';
 import * as fs from 'fs';
 import * as sharp from 'sharp';
 import { EditArticleDto } from "src/dtos/article/edit.article.dto";
+import { RoleCheckerGuard } from "src/misc/role.checker.guard";
+import { AllowToRoles } from "src/misc/allow.to.roles.descriptor";
 @Controller('api/article')
 @Crud({
     model: {
@@ -43,7 +45,7 @@ import { EditArticleDto } from "src/dtos/article/edit.article.dto";
         }
     },
     routes: {
-        exclude: ['updateOneBase','replaceOneBase', 'deleteOneBase'],
+        exclude: ['updateOneBase', 'replaceOneBase', 'deleteOneBase'],
     }
 })
 
@@ -53,17 +55,23 @@ export class ArticleController {
         public photoService: PhotoService,) { }
 
     @Post('createFull')
+    @UseGuards(RoleCheckerGuard)
+    @AllowToRoles('administrator')
     createFullArticle(@Body() data: AddArticleDto) {
         return this.service.createFullArticle(data);
     }
 
-     @Patch(':id')
-     editFullArticle(@Param('id') id: number, @Body() data: EditArticleDto){
-            return this.service.editFullArticle(id, data);
+    @Patch(':id')
+    @UseGuards(RoleCheckerGuard)
+    @AllowToRoles('administrator')
+    editFullArticle(@Param('id') id: number, @Body() data: EditArticleDto) {
+        return this.service.editFullArticle(id, data);
 
     }
 
     @Post(':id/uploadPhoto/')
+    @UseGuards(RoleCheckerGuard)
+    @AllowToRoles('administrator')
     @UseInterceptors(
         FileInterceptor('photo', {
             storage: diskStorage({
@@ -115,7 +123,7 @@ export class ArticleController {
 
     )
     async uploadPhoto(
-        @Param('id') articleId: number, 
+        @Param('id') articleId: number,
         @UploadedFile() photo,
         @Req() req
     ): Promise<ApiResponse | Photo> {
@@ -138,8 +146,8 @@ export class ArticleController {
             return new ApiResponse('error', -4002, 'Bad file content type!');
         }
 
-          await this.createResizedImage(photo, StorageConfig.photo.resize.thumb);
-          await this.createResizedImage(photo, StorageConfig.photo.resize.small);
+        await this.createResizedImage(photo, StorageConfig.photo.resize.thumb);
+        await this.createResizedImage(photo, StorageConfig.photo.resize.small);
         const newPhoto: Photo = new Photo();
         newPhoto.articleId = articleId;
         newPhoto.imagePath = photo.filename;
@@ -147,21 +155,21 @@ export class ArticleController {
 
         const savedPhoto = await this.photoService.add(newPhoto);
         if (!savedPhoto) {
-          return new ApiResponse('error', -4001);
-       
-        
-        
+            return new ApiResponse('error', -4001);
+
+
+
+        }
+        return savedPhoto;
     }
-    return savedPhoto;
-}
 
     async createResizedImage(photo, resizeSettings) {
         const originalFilePath = photo.destination;
         const fileName = photo.filename;
 
         const destinationFilePath = StorageConfig.photo.destination +
-                                    resizeSettings.directory+
-                                    fileName;
+            resizeSettings.directory +
+            fileName;
 
         await sharp(originalFilePath)
             .resize({
@@ -175,39 +183,41 @@ export class ArticleController {
             .toFile(destinationFilePath);
     }
     @Delete(':articleId/deletePhoto/:photoId/')
+    @UseGuards(RoleCheckerGuard)
+    @AllowToRoles('administrator' )
     public async deletePhoto(
         @Param('articleId') articleId: number,
         @Param('photoId') photoId: number,) {
 
-            const photo = await this.photoService.findOne({
-                articleId: articleId ,
-                photoId : photoId
-            });
+        const photo = await this.photoService.findOne({
+            articleId: articleId,
+            photoId: photoId
+        });
 
-            if(!photo){
-                return new ApiResponse('error' , -4004, 'Photo not found!');
+        if (!photo) {
+            return new ApiResponse('error', -4004, 'Photo not found!');
 
-            }
-            try{
+        }
+        try {
             fs.unlinkSync(StorageConfig.photo.destination + photo.imagePath);
-            fs.unlinkSync(StorageConfig.photo.destination 
-                + StorageConfig.photo.resize.thumb 
+            fs.unlinkSync(StorageConfig.photo.destination
+                + StorageConfig.photo.resize.thumb
                 + photo.imagePath);
-                fs.unlinkSync(StorageConfig.photo.destination 
-                    + StorageConfig.photo.resize.small 
-                    + photo.imagePath);
-                } catch (e){
+            fs.unlinkSync(StorageConfig.photo.destination
+                + StorageConfig.photo.resize.small
+                + photo.imagePath);
+        } catch (e) {
 
 
-                }
+        }
 
 
-                   const deleteResult =  await this.photoService.deleteById(photoId);
-                    if(deleteResult.affected=== 0){
-                        return new ApiResponse('error' , -4004, 'Photo not found!');
-                    }
+        const deleteResult = await this.photoService.deleteById(photoId);
+        if (deleteResult.affected === 0) {
+            return new ApiResponse('error', -4004, 'Photo not found!');
+        }
 
-                    return new ApiResponse('ok' , 0, 'One photo deleted.');
+        return new ApiResponse('ok', 0, 'One photo deleted.');
 
     }
 
