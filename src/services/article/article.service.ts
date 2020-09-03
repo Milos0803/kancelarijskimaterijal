@@ -15,6 +15,7 @@ import { ArticleSize } from "src/entities/article.size.entity";
 import { ArticleColor } from "src/entities/article.color.entity";
 import { Photo } from "src/entities/photo.entity";
 import { EditArticleDto } from "src/dtos/article/edit.article.dto";
+import { ArticleSearchDto } from "src/dtos/article/article.search.dto";
 
 
 @Injectable()
@@ -89,7 +90,7 @@ export class ArticleService extends TypeOrmCrudService<Article>{
 
     }
     async editFullArticle(articleId: number, data: EditArticleDto): Promise<Article | ApiResponse> {
-        const postojeciArtikal: Article = await this.article.findOne(articleId,{
+        const postojeciArtikal: Article = await this.article.findOne(articleId, {
             relations: ['articlePrices', 'articleSize', 'articleColor']
         });
         if (!postojeciArtikal) {
@@ -102,50 +103,96 @@ export class ArticleService extends TypeOrmCrudService<Article>{
         postojeciArtikal.categoryId = data.categoryId;
         postojeciArtikal.excerpt = data.excerpt;
         postojeciArtikal.description = data.description;
-        
-        
+
+
         const savedArticle = await this.article.save(postojeciArtikal);
-        if (!savedArticle){
-            return new ApiResponse('error', -5002, 'Article not updated'); 
+        if (!savedArticle) {
+            return new ApiResponse('error', -5002, 'Article not updated');
         }
 
         const newPrice: string = Number(data.price).toFixed(2);
-        const lastPrice = postojeciArtikal.articlePrices[postojeciArtikal.articlePrices.length-1].price;
+        const lastPrice = postojeciArtikal.articlePrices[postojeciArtikal.articlePrices.length - 1].price;
         const lastPriceString: string = Number(lastPrice).toFixed(2);
 
-        if(newPrice !==  lastPriceString){
-           const newArticlePrice = new ArticlePrice();
+        if (newPrice !== lastPriceString) {
+            const newArticlePrice = new ArticlePrice();
             newArticlePrice.articleId = articleId;
             newArticlePrice.price = data.price;
-           const savedArticlePrice = await this.articlePrice.save(newArticlePrice);
-            if(!savedArticlePrice){
-                return new ApiResponse('error', -5003, 'Price not updated'); 
+            const savedArticlePrice = await this.articlePrice.save(newArticlePrice);
+            if (!savedArticlePrice) {
+                return new ApiResponse('error', -5003, 'Price not updated');
             }
             const newArticleSize = new ArticleSize();
-            newArticleSize.articleId = articleId ;
+            newArticleSize.articleId = articleId;
             newArticleSize.size = data.size;
-    
-           const newArticleSizeSave = await this.ArticleSize.save(newArticleSize);
-           if(!newArticleSizeSave){
-            return new ApiResponse('error', -5003, 'Price not updated'); 
+
+            const newArticleSizeSave = await this.ArticleSize.save(newArticleSize);
+            if (!newArticleSizeSave) {
+                return new ApiResponse('error', -5003, 'Price not updated');
+            }
+
         }
 
-
-
-
-
-       }
-       
-       
-
-      
-       
-    
     }
-    
 
-    
+    async search(data: ArticleSearchDto): Promise<Article[]> {
 
+        const builder = await this.article.createQueryBuilder("article");
+
+        builder.innerJoin("article.articlePrices" ,"ap", "ap.createdAt = (SELECT MAX ( ap.created_At )FROM article_price AS ap WHERE ap.articleId = article.article_Id ORDER BY ap.created_At) ");
+
+        builder.where('article.categoryId= :catId', {catId: data.categoryId});
+   
+        if(data.keyword&& data.keyword.length>0){
+           
+           
+            builder.andWhere('(article.name LIKE :kw OR article.excerpt LIKE :kw OR article.description LIKE :kw)' ,{kw: '%'+ data.keyword.trim() + '%'});
+        
+        
+        }
+
+        if(data.priceMin &&  typeof data.priceMin === 'number'){
+            builder.andWhere('ap.price>= :min', {min:data.priceMin});
+        }
+        if(data.priceMax && typeof data.priceMax === 'number'){
+            builder.andWhere('ap.price<= :max', {max:data.priceMax});
+        }
+
+        let orderBy = 'article.name';
+        let orderDirection: 'ASC' | 'DESC' = 'ASC';
+
+        if(data.orderBy ) {
+            orderBy = data.orderBy;
+            if(orderBy === 'price'){
+                orderBy = 'ap.price';
+            }
+            if(orderBy === 'name'){
+                orderBy = 'article.name';
+            }
+        }
+
+        if(data.orderDirection ) {
+            orderDirection = data.orderDirection;
+        }
+
+        builder.orderBy(orderBy, orderDirection)
+
+        let page = 0 ;
+        let perPage: 5 | 10 | 25 | 50 = 25;
+        if(data.page && typeof data.page === 'number'){
+            page =data.page;
+        }
+
+        if(data.itemsPerPage && typeof data.itemsPerPage ==='number'){
+            perPage = data.itemsPerPage;
+        }
+
+        builder.skip(page * perPage);
+        builder.take(perPage);
+        let items = await builder.getMany();
+
+        return items ;
+    }
 
 }
 
