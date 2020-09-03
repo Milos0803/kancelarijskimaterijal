@@ -36,11 +36,10 @@ export class AuthMiddleware implements NestMiddleware {
         } catch (e){
             throw new HttpException('Token not found', HttpStatus.UNAUTHORIZED);
         }
+
         if (!jwtData) {
             throw new HttpException('Token not found', HttpStatus.UNAUTHORIZED);
         }
-
-        const ip = req.ip.toString();
 
         if (jwtData.ip !== req.ip.toString()) {
             throw new HttpException('Token not found', HttpStatus.UNAUTHORIZED);
