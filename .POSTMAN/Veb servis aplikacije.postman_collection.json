@@ -1,0 +1,3211 @@
+{
+	"info": {
+		"_postman_id": "51401ff4-be96-442a-838d-8f2c33f37722",
+		"name": "Veb servis aplikacije",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Administrator",
+			"item": [
+				{
+					"name": "Podaci svih administratora",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Length",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/administrator/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"administrator",
+								""
+							]
+						},
+						"description": "Vraca rezultate svih administratora."
+					},
+					"response": [
+						{
+							"name": "Podaci svih administratora",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/administrator/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"administrator",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "177"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b1-y+5t9fh2c4dR8yPNrxmz3mt76ZY\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 26 Aug 2020 17:24:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"administratorId\": 1,\n        \"username\": \"Milos\",\n        \"passwordHash\": \"sadnaczncsajdk23k2131k\"\n    },\n    {\n        \"administratorId\": 2,\n        \"username\": \"test_user\",\n        \"passwordHash\": \"1231231278sdu8wesbnasdsandnzcbas\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Podaci jednog administratora",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/administrator/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"administrator",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Podaci jednog administratora",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/administrator/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"administrator",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "80"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"50-51HKU+6t6rw6kjQkXT3wPucSjdw\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 26 Aug 2020 17:28:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"administratorId\": 1,\n    \"username\": \"Milos\",\n    \"passwordHash\": \"sadnaczncsajdk23k2131k\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Dodavanje administratora",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n\"username\": \"Miloske\",\r\n\"password\": \"Cujnekalozinka\"\r\n\r\n\r\n\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/administrator/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"administrator",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Izmena administratora",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n\"password\": \"nekanovaLozinka123\"\r\n\r\n\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/administrator/5/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"administrator",
+								"5",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Izmena administratora - uspesno",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n\"password\": \"nekanovaLozinka123\"\r\n\r\n\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/administrator/1/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"administrator",
+										"1",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "186"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ba-tZ1dg15Z5X2yaxzLNbHNtbOlkuU\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 26 Aug 2020 18:02:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"administratorId\": 1,\n    \"username\": \"Milos\",\n    \"passwordHash\": \"311A87A9B8E1F3D76B9106CE6DC374F094A3BAC349989903BD405E7490B566BF20EBF3CF45A10E6A39496E95BA1E7251B4B4561EC456CBA2D003971F2D9E94FE\"\n}"
+						},
+						{
+							"name": "Izmena administratora - uspesno",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n\"password\": \"nekanovaLozinka123\"\r\n\r\n\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/administrator/5/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"administrator",
+										"5",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "187"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"bb-y64PvjDkNZKDiVgs3/bBNJ1hJ88\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 02 Sep 2020 19:05:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"administratorId\": 5,\n    \"username\": \"test  \",\n    \"passwordHash\": \"311A87A9B8E1F3D76B9106CE6DC374F094A3BAC349989903BD405E7490B566BF20EBF3CF45A10E6A39496E95BA1E7251B4B4561EC456CBA2D003971F2D9E94FE\"\n}"
+						},
+						{
+							"name": "Izmena administratora - admin not found",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n\"password\": \"nekanovaLozinka123\"\r\n\r\n\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/administrator/1/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"administrator",
+										"1",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34-TohoSz0THfgyH4V7rCdfcfXcq54\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 02 Sep 2020 19:05:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"error\",\n    \"statusCode\": -1002,\n    \"message\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Editovanje nepostojeceg administratora",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n\"password\" : \"nekalozinazanepostojeceg\"\r\n\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/administrator/333/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"administrator",
+								"333",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Editovanje nepostojeceg administratora - administrator ne postoji ",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n\"password\" : \"nekalozinazanepostojeceg\"\r\n\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/administrator/333/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"administrator",
+										"333",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34-TohoSz0THfgyH4V7rCdfcfXcq54\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 02 Sep 2020 19:03:46 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"error\",\n    \"statusCode\": -1002,\n    \"message\": null\n}"
+						},
+						{
+							"name": "Editovanje nepostojeceg administratora - Patch metoda",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n\"password\" : \"nekalozinazanepostojeceg\"\r\n\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/administrator/333/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"administrator",
+										"333",
+										""
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "87"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"57-G5/dJWPAoeS7HUWPJhhoU2JtCvo\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 02 Sep 2020 19:04:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 404,\n    \"message\": \"Cannot PATCH /api/administrator/333/\",\n    \"error\": \"Not Found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Vracanje nepostojeceg administratora",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/administrator/555/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"administrator",
+								"555",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Vracanje nepostojeceg administratora",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/administrator/555/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"administrator",
+										"555",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34-TohoSz0THfgyH4V7rCdfcfXcq54\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 26 Aug 2020 18:15:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"error\",\n    \"statusCode\": -1002,\n    \"message\": null\n}"
+						},
+						{
+							"name": "Vracanje nepostojeceg administratora - error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/administrator/555/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"administrator",
+										"555",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34-TohoSz0THfgyH4V7rCdfcfXcq54\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 26 Aug 2020 18:15:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"error\",\n    \"statusCode\": -1002,\n    \"message\": null\n}"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsIklkIjozLCJpZGVudGl0eSI6ImFkbWluIiwiZXh0IjoxNjAwMjgxNzI0LjEzOCwiaXAiOiI6OjEiLCJ1YSI6IlBvc3RtYW5SdW50aW1lLzcuMjYuMyIsImlhdCI6MTU5OTA3MjEyNH0.efp29B2bsCT0hdMEr9-ENvZo8mOJDB0rAks5HpRoZDU",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "1ef02df5-bb05-4b5a-ab83-7a43b018e081",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "4e7a8164-5414-47f3-a79a-70c76d11a608",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Article",
+			"item": [
+				{
+					"name": "POST pravljenje celog artikla",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n    \"name\": \"Proba artikla koverta plava 22\",\r\n    \"categoryId\":2,\r\n    \"excerpt\": \"Kratak opis opisa opis\",\r\n    \"description\" : \"Opis proizvoda!\",\r\n    \"price\": 33.25,\r\n    \"size\" : \"20x10\",\r\n    \"color\": \"Blue\"\r\n\r\n    \r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/article/createFull",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"article",
+								"createFull"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST pravljenje celog artikla - color,size",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n    \"name\": \"Proba artikla koverta plava 22\",\r\n    \"categoryId\":2,\r\n    \"excerpt\": \"Kratak opis opisa opis\",\r\n    \"description\" : \"Opis proizvoda!\",\r\n    \"price\": 33.25,\r\n    \"size\" : \"20x10\",\r\n    \"color\": \"Blue\"\r\n\r\n    \r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/article/createFull",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"article",
+										"createFull"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "365"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"16d-0AvBOWcGxi9ha84QxQYj6HGfgLM\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 30 Aug 2020 14:34:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"articleId\": 8,\n    \"name\": \"Proba artikla koverta plava 22\",\n    \"categoryId\": 2,\n    \"excerpt\": \"Kratak opis opisa opis\",\n    \"description\": \"Opis proizvoda!\",\n    \"createdAt\": null,\n    \"articlePrices\": [\n        {\n            \"articlePriceId\": 5,\n            \"articleId\": 8,\n            \"price\": \"33\",\n            \"createdAt\": null\n        }\n    ],\n    \"articleSize\": {\n        \"articleSizeId\": 4,\n        \"size\": \"20x10\",\n        \"articleId\": 8\n    },\n    \"articleColor\": {\n        \"articleColorId\": 2,\n        \"color\": \"Blue\",\n        \"articleId\": 8\n    }\n}"
+						},
+						{
+							"name": "POST pravljenje celog artikla - bez dodate cene",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n    \"name\": \"assdDadaasdads22sssdsssssadssss da\",\r\n    \"categoryId\":2,\r\n    \"excerpt\": \"Kratasdaddsak opis\",\r\n    \"description\" : \"Opis proizvoda!\",\r\n    \"features\" :[ {\r\n\r\n        \"articlePriceId\": 1,\r\n        \"price\": 33.33\r\n\r\n    }\r\n    ]\r\n\r\n    \r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/article/createFull",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"article",
+										"createFull"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "174"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ae-x0QcukMR76Ord4g2zYBtAYeL0+4\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 28 Aug 2020 16:34:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"articleId\": 48,\n    \"name\": \"assdDadaasdads22sssdsssssadssss da\",\n    \"categoryId\": 2,\n    \"excerpt\": \"Kratasdaddsak opis\",\n    \"description\": \"Opis proizvoda!\",\n    \"createdAt\": null,\n    \"articlePrices\": []\n}"
+						},
+						{
+							"name": "POST pravljenje celog artikla- dodata cena",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n    \"name\": \"Proba artikla\",\r\n    \"categoryId\":2,\r\n    \"excerpt\": \"Kratak opis opisa opis\",\r\n    \"description\" : \"Opis proizvoda!\",\r\n   \"price\": 33.25\r\n\r\n    \r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/article/createFull",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"article",
+										"createFull"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "220"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"dc-xLa9HjSaCnEGQtBhXHV7Ddc4jAE\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 30 Aug 2020 14:16:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"articleId\": 2,\n    \"name\": \"Proba artikla\",\n    \"categoryId\": 2,\n    \"excerpt\": \"Kratak opis opisa opis\",\n    \"description\": \"Opis proizvoda!\",\n    \"createdAt\": null,\n    \"articlePrices\": [\n        {\n            \"articlePriceId\": 1,\n            \"articleId\": 2,\n            \"price\": \"33\",\n            \"createdAt\": null\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Upload photo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/C:/Users/milos/Desktop/baza.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/article/1/uploadPhoto/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"article",
+								"1",
+								"uploadPhoto",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Upload photo- bad extension",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "/C:/Users/milos/Desktop/bazapodatakaold.png.sql"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/article/2/uploadPhoto/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"article",
+										"2",
+										"uploadPhoto",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "69"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"45-/1BctOZfI9HUiikyGHz7sO4T6hY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 30 Aug 2020 22:28:09 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"error\",\n    \"statusCode\": -4002,\n    \"message\": \"Bad file extension!\"\n}"
+						},
+						{
+							"name": "Upload article photo - uspesno",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "/C:/Users/milos/Desktop/baza.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/article/5/uploadPhoto/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"article",
+										"5",
+										"uploadPhoto",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "71"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"47-VEgNecVTojYV7dkyEmC1oRMqEBY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 30 Aug 2020 21:29:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"articleId\": \"5\",\n    \"imagePath\": \"2020830-4412875856-baza.png\",\n    \"photoId\": 7\n}"
+						},
+						{
+							"name": "Upload photo - photo thumnb , small photo",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "/C:/Users/milos/Desktop/problem 1.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/article/2/uploadPhoto/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"article",
+										"2",
+										"uploadPhoto",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "76"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4c-WR1uW+l5zDA+vApNPk2ggwaGXM4\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 31 Aug 2020 10:27:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"articleId\": \"2\",\n    \"imagePath\": \"2020831-6748086298-problem-1.png\",\n    \"photoId\": 2\n}"
+						},
+						{
+							"name": "Upload photo- fajl za upload nije dobar",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "/C:/Users/milos/AppData/Local/Postman/Postman.exe"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/article/1/uploadPhoto/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"article",
+										"1",
+										"uploadPhoto",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "69"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"45-/1BctOZfI9HUiikyGHz7sO4T6hY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 30 Aug 2020 22:10:32 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"error\",\n    \"statusCode\": -4002,\n    \"message\": \"Bad file extension!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Vracanje jednog artikla",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/article/1/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"article",
+								"1",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Vracanje svih artikla",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/api/article/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"article",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2444"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"98c-TYTPGYYd6TfzkP6kFxbHft32UOY\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 02 Sep 2020 23:44:55 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"articleId\": 1,\n        \"name\": \"Kancelarijski sto za računar\",\n        \"categoryId\": 3,\n        \"excerpt\": \"Kratak opis\",\n        \"description\": \"kancelarijski sto za računar, malih dimenzija,pogodan za manje prostore.\",\n        \"createdAt\": \"2020-08-26T21:18:16.000Z\",\n        \"category\": {\n            \"categoryId\": 3,\n            \"name\": \"Stolovi\"\n        },\n        \"articlePrices\": [],\n        \"articleColor\": null\n    },\n    {\n        \"articleId\": 2,\n        \"name\": \"Kovertica plave boje 20mm\",\n        \"categoryId\": 2,\n        \"excerpt\": \"Kratak opis opisa opis\",\n        \"description\": \"Opis proizvoda!\",\n        \"createdAt\": \"2020-08-30T16:59:10.000Z\",\n        \"category\": {\n            \"categoryId\": 2,\n            \"name\": \"Koverte\"\n        },\n        \"articlePrices\": [],\n        \"articleColor\": null\n    },\n    {\n        \"articleId\": 4,\n        \"name\": \"Kovertica plave boje 23mm\",\n        \"categoryId\": 2,\n        \"excerpt\": \"Kratak opis opisa opis\",\n        \"description\": \"Opis proizvoda!\",\n        \"createdAt\": \"2020-08-30T16:59:10.000Z\",\n        \"category\": {\n            \"categoryId\": 2,\n            \"name\": \"Koverte\"\n        },\n        \"articlePrices\": [\n            {\n                \"articlePriceId\": 1,\n                \"articleId\": 4,\n                \"price\": \"33\",\n                \"createdAt\": \"2020-09-01T18:33:04.000Z\"\n            },\n            {\n                \"articlePriceId\": 2,\n                \"articleId\": 4,\n                \"price\": \"25\",\n                \"createdAt\": \"2020-09-01T18:33:21.000Z\"\n            },\n            {\n                \"articlePriceId\": 3,\n                \"articleId\": 4,\n                \"price\": null,\n                \"createdAt\": null\n            },\n            {\n                \"articlePriceId\": 4,\n                \"articleId\": 4,\n                \"price\": null,\n                \"createdAt\": null\n            },\n            {\n                \"articlePriceId\": 5,\n                \"articleId\": 4,\n                \"price\": null,\n                \"createdAt\": null\n            }\n        ],\n        \"articleColor\": null\n    },\n    {\n        \"articleId\": 5,\n        \"name\": \"Proba artikla koverta plava\",\n        \"categoryId\": 2,\n        \"excerpt\": \"Kratak opis opisa opis\",\n        \"description\": \"Opis proizvoda!\",\n        \"createdAt\": \"2020-08-30T16:59:10.000Z\",\n        \"category\": {\n            \"categoryId\": 2,\n            \"name\": \"Koverte\"\n        },\n        \"articlePrices\": [],\n        \"articleColor\": null\n    },\n    {\n        \"articleId\": 7,\n        \"name\": \"Proba artikla koverta plava 2\",\n        \"categoryId\": 2,\n        \"excerpt\": \"Kratak opis opisa opis\",\n        \"description\": \"Opis proizvoda!\",\n        \"createdAt\": \"2020-08-30T16:59:10.000Z\",\n        \"category\": {\n            \"categoryId\": 2,\n            \"name\": \"Koverte\"\n        },\n        \"articlePrices\": [],\n        \"articleColor\": null\n    },\n    {\n        \"articleId\": 8,\n        \"name\": \"Proba artikla koverta plava 22\",\n        \"categoryId\": 2,\n        \"excerpt\": \"Kratak opis opisa opis\",\n        \"description\": \"Opis proizvoda!\",\n        \"createdAt\": \"2020-08-30T16:59:10.000Z\",\n        \"category\": {\n            \"categoryId\": 2,\n            \"name\": \"Koverte\"\n        },\n        \"articlePrices\": [],\n        \"articleColor\": null\n    },\n    {\n        \"articleId\": 10,\n        \"name\": \"Probaaa artikla koverta plava 22\",\n        \"categoryId\": 2,\n        \"excerpt\": \"Kratak opis opisa opis\",\n        \"description\": \"Opis proizvoda!\",\n        \"createdAt\": null,\n        \"category\": {\n            \"categoryId\": 2,\n            \"name\": \"Koverte\"\n        },\n        \"articlePrices\": [],\n        \"articleColor\": null\n    },\n    {\n        \"articleId\": 11,\n        \"name\": \"Kovertica\",\n        \"categoryId\": 1,\n        \"excerpt\": \"Kratak opis opisa opis\",\n        \"description\": \"Opis proizvoda!\",\n        \"createdAt\": null,\n        \"category\": {\n            \"categoryId\": 1,\n            \"name\": \"Hemijske olovke promena\"\n        },\n        \"articlePrices\": [],\n        \"articleColor\": null\n    }\n]"
+						},
+						{
+							"name": "Vracanje jednog artikla - uspesno",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/api/article/1/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"article",
+										"1",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "437"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1b5-SyBOa6tYF2CIV6WoHFJUwSgGyIE\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 30 Aug 2020 21:55:39 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"articleId\": 1,\n    \"name\": \"Kancelarijski sto za računar\",\n    \"categoryId\": 3,\n    \"excerpt\": \"Kratak opis\",\n    \"description\": \"kancelarijski sto za računar, malih dimenzija,pogodan za manje prostore.\",\n    \"createdAt\": \"2020-08-26T21:18:16.000Z\",\n    \"category\": {\n        \"categoryId\": 3,\n        \"name\": \"Stolovi\"\n    },\n    \"articlePrices\": [\n        {\n            \"articlePriceId\": 1,\n            \"articleId\": 1,\n            \"price\": \"33\",\n            \"createdAt\": \"2020-08-30T23:49:31.000Z\"\n        }\n    ],\n    \"articleColor\": {\n        \"articleColorId\": 4,\n        \"color\": \"Blue\",\n        \"articleId\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete photo",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/article/1/deletePhoto/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"article",
+								"1",
+								"deletePhoto",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete photo - one photo deleted",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/article/1/deletePhoto/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"article",
+										"1",
+										"deletePhoto",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "61"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3d-01wND6txx5R0TS6Zh52dju3GYvA\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 01 Sep 2020 16:23:32 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"ok\",\n    \"statusCode\": 0,\n    \"message\": \"One photo deleted.\"\n}"
+						},
+						{
+							"name": "Delete photo- photo not found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/article/1/deletePhoto/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"article",
+										"1",
+										"deletePhoto",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "66"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"42-kr7G8q+hDZEz8wNTcPqBZzC5APU\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 01 Sep 2020 16:28:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"error\",\n    \"statusCode\": -4004,\n    \"message\": \"Photo not found!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Edit article",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"name\":  \"Kovertica plave boje 23mm\",\r\n\"categoryId \": 2,\r\n\"excerpt \":  \"Mini kovertica plava\",\r\n\"description \": \"Mini kovertica plave boje, moze sluziti kao poklon\",\r\n\"price \": 74.32,\r\n\"size \": \"20*222mm\",\r\n\"color \": \"SilverBlue\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/article/4/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"article",
+								"4",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Edit article- uspesno. Ali ne vraca prikaz artkla,  vec update-uje u bazi",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"name\":  \"Kovertica plave boje 23mm\",\r\n\"categoryId \": 2,\r\n\"excerpt \":  \"Mini kovertica plava\",\r\n\"description \": \"Mini kovertica plave boje, moze sluziti kao poklon\",\r\n\"price \": 74.32,\r\n\"size \": \"20*222mm\",\r\n\"color \": \"SilverBlue\"\r\n}\r\n"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/article/4/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"article",
+										"4",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 01 Sep 2020 18:36:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Length",
+									"value": "0"
+								}
+							],
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "Edit article - article not found",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"name\":  \"Kovertica plave boje 20mm\",\r\n\"categoryId \": 2,\r\n\"excerpt \":  \"Mini kovertica plava\",\r\n\"description \": \"Mini kovertica plave boje, moze sluziti kao poklon\",\r\n\"price \": 74,\r\n\"size \": \"20*25mm\",\r\n\"color \": \"Silver-blue\"\r\n}\r\n"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/article/3/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"article",
+										"3",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "67"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"43-m7njqXSJVHhrGE1x1LalFt7ggqo\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 01 Sep 2020 17:48:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"error\",\n    \"statusCode\": -5001,\n    \"message\": \"Article not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Search articles",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"categoryId\" : 2,\r\n    \"kewords\" : \"mm\"\r\n\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/article/search/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"article",
+								"search",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Search articles - uspesno",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"categoryId\" : 2\r\n\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/article/search/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"article",
+										"search",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "173"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ad-2bdSensrKbyCP1mNwQipqKIT/0U\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Sep 2020 00:33:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"articleId\": 4,\n        \"name\": \"Kovertica plave boje 23mm\",\n        \"categoryId\": 2,\n        \"excerpt\": \"Kratak opis opisa opis\",\n        \"description\": \"Opis proizvoda!\",\n        \"createdAt\": \"2020-08-30T16:59:10.000Z\"\n    }\n]"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsIklkIjozLCJpZGVudGl0eSI6ImFkbWluIiwiZXh0IjoxNjAwMjY2NjIzLjExLCJpcCI6Ijo6MSIsInVhIjoiUG9zdG1hblJ1bnRpbWUvNy4yNi4zIiwiaWF0IjoxNTk5MDU3MDIzfQ.AeIizJaS-s9uaKB_HeHrrLLFvvA5Tt9COiwnWiVMpH4",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "0f34e65c-d043-4a72-a6f3-33c0548f1118",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "cf3a321c-9482-4d60-93c3-f9e3064fdd42",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Administrator login",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n\"username\":\"admin\" ,\r\n\"password\": \"administrator\"\r\n\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/administrator/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"administrator",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST auth login - uspesan login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n\"username\":\"admin\" ,\r\n\"password\": \"admin\"\r\n\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/login/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"login",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "290"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"122-QbnvPLesAP6t29orXoMhypy8D8w\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 Aug 2020 16:37:59 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"administratorId\": 7,\n    \"username\": \"admin\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjcsInVzZXJuYW1lIjoiYWRtaW4iLCJleHQiOjE1OTk5Mjg2NzkuMzUxLCJpcCI6Ijo6MSIsInVhIjoiUG9zdG1hblJ1bnRpbWUvNy4yNi4zIiwiaWF0IjoxNTk4NzE5MDc5fQ.hq6skIhSwjq6WNcyr8Lyf9q1p2aHbhsSXJJRU2TKh-I\"\n}"
+						},
+						{
+							"name": "POST auth login - administrator ne postoji",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n\"username\":\"admin1\" ,\r\n\"password\": \"admin\"\r\n\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/login/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"login",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34-jVzHjGg0W81AgoBNOOnaoLkouLY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 Aug 2020 16:14:33 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"error\",\n    \"statusCode\": -3001,\n    \"message\": null\n}"
+						},
+						{
+							"name": "POST auth login -uspesan login sa tokenom , novi administrator.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n\"username\":\"Pera\" ,\r\n\"password\": \"PeraPeric\"\r\n\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/login/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"login",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "287"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"11f-+DEUk3cmjYFeJWy2VaAd9Uxwctg\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 Aug 2020 17:27:08 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"administratorId\": 8,\n    \"username\": \"Pera\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjgsInVzZXJuYW1lIjoiUGVyYSIsImV4dCI6MTU5OTkzMTYyOC43NTksImlwIjoiOjoxIiwidWEiOiJQb3N0bWFuUnVudGltZS83LjI2LjMiLCJpYXQiOjE1OTg3MjIwMjh9.wAiuBUOl1Z51BmdMaq2nlGqDe_xzV1C6LJprP_MPN7c\"\n}"
+						},
+						{
+							"name": "POST auth login - pogresna sifra pri logovanju",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n\"username\":\"admin\" ,\r\n\"password\": \"admin1\"\r\n\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/login/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"login",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34-yGnd1fUn+KRemOJUJKfIJoExxS4\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 Aug 2020 16:15:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"error\",\n    \"statusCode\": -3002,\n    \"message\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Dodavanje korisnika",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n\"email\" : \"test@test3.com\",\r\n\"password\": \"abcdtest\",\r\n\"forename\": \"Milos\",\r\n\"surname\" : \"Stefanovic\",\r\n\"postalAddress\" : \"9.oktobar 3\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/user/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Dodavanje novog korisnika , uspesno.",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n\"email\" : \"test@test2.com\",\r\n\"password\": \"abcdtest\",\r\n\"forename\": \"Milos\",\r\n\"surname\" : \"Stefanovic\",\r\n\"postalAddress\" : \"9.oktobar 3\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/user/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"user",
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "255"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ff-vQh7qFCISH8Y6w6Dar51PEaXL+U\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 01 Sep 2020 20:06:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"email\": \"test@test2.com\",\n    \"passwordHash\": \"D65534E6F152D0CF0E16325F5EF17A890F887106C5EEF8838928A16977357B6625DFCD35B167DD49152E1074CC36FBCEA9B2A05E867D549BD6B159DCBB954672\",\n    \"forename\": \"Milos\",\n    \"surname\": \"Stefanovic\",\n    \"postalAddress\": \"9.oktobar 3\",\n    \"userId\": 1\n}"
+						},
+						{
+							"name": "Podaci novog korisnika - neuspesno , duplikat",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n\"email\" : \"test@test.com\",\r\n\"password\": \"abcdtest\",\r\n\"forname\": \"Milos\",\r\n\"surname\" : \"Stefanovic\",\r\n\"postalAddress\" : \"9.oktobar 3\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/user/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"user",
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "85"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"55-i9VUGVCJbTqhqlzDdpOGKWBQFq8\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 01 Sep 2020 19:29:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"error\",\n    \"statusCode\": -6001,\n    \"message\": \"This user account cannot be created\"\n}"
+						}
+					]
+				},
+				{
+					"name": "User login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n\"email\" : \"test@test3.com\",\r\n\"password\" : \"abcdtest\"\r\n\r\n\r\n\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/user/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "User login - wrong password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n\"email\" : \"test@test3.com\",\r\n\"password\" : \"abcdtest\"\r\n\r\n\r\n\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/user/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"user",
+										"login"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34-yGnd1fUn+KRemOJUJKfIJoExxS4\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 02 Sep 2020 15:31:09 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"error\",\n    \"statusCode\": -3002,\n    \"message\": null\n}"
+						},
+						{
+							"name": "User login- wrong email address",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n\"email\" : \"test@test3.rs\",\r\n\"password\" : \"abcdtest\"\r\n\r\n\r\n\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/user/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"user",
+										"login"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34-jVzHjGg0W81AgoBNOOnaoLkouLY\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 02 Sep 2020 15:31:57 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"error\",\n    \"statusCode\": -3001,\n    \"message\": null\n}"
+						},
+						{
+							"name": "User login - uspesan user login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n\"email\" : \"test@test3.com\",\r\n\"password\" : \"abcdtest\"\r\n\r\n\r\n\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/user/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"user",
+										"login"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "299"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"12b-xkeJQVuISM/yLu961eCdDF2pOHI\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 02 Sep 2020 15:30:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 4,\n    \"identity\": \"test@test3.com\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidXNlciIsIklkIjo0LCJpZGVudGl0eSI6InRlc3RAdGVzdDMuY29tIiwiZXh0IjoxNjAwMjcwMjEwLjAzMiwiaXAiOiI6OjEiLCJ1YSI6IlBvc3RtYW5SdW50aW1lLzcuMjYuMyIsImlhdCI6MTU5OTA2MDYxMH0.ixnVKa-3CIn2hkh3VsvZ8LaQSz9XkRXx9SlzexJ7mu4\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Refresh user token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/auth/user/refresh",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"user",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsIklkIjoxLCJpZGVudGl0eSI6InRlc3QxMjMiLCJleHQiOjE2MDAyOTk2NjUuOTIzLCJpcCI6Ijo6MSIsInVhIjoiUG9zdG1hblJ1bnRpbWUvNy4yNi4zIiwiaWF0IjoxNTk5MDkwMDY1fQ.kkpsc4Xl99I2BS-CAa_Xnx_hOdRmyzaq-NQxkyfxQcc",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "9f4ac412-317f-4db6-bc18-5c8f8c58f4c0",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "dd24da31-40f7-424f-a0dd-142f43e82940",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Dodavanje kategorije od strane administratora",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n\"name\" : \"Hemijske sa stampom\"\r\n\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/category/createCategory",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"category",
+								"createCategory"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Dodavanje kategorije od strane administratora - uspesno",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n\"name\" : \"Hemijske sa stampom\"\r\n\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/category/createCategory",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"category",
+										"createCategory"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "45"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2d-GJW79YGhnXE5PynlbHKzPGbbt38\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 Aug 2020 18:44:28 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"categoryId\": 6,\n    \"name\": \"Hemijske sa stampom\"\n}"
+						},
+						{
+							"name": "Dodavanje kategorije bez admin permisija.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n\"categoryId\" : \"Hemijske sa stampom\"\r\n\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/category/createCategory",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"category",
+										"createCategory"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "46"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2e-YmJGLZcbfj0S25Nb7dFgdH1kZ3M\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 Aug 2020 18:40:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 401,\n    \"message\": \"Token not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Editovanje postojece kategorije",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n\r\n\"name\": \"Hemijske olovke promena\"\r\n\r\n\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/category/1/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"category",
+								"1",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Editovanje postojece kategorije -uspesno",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n\r\n\"name\": \"Hemijske olovke promena\"\r\n\r\n\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/category/1/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"category",
+										"1",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "49"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"31-7KGCCHVGrPpfw2nwFQFqrSPmezw\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 30 Aug 2020 14:53:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"categoryId\": 1,\n    \"name\": \"Hemijske olovke promena\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Pregled svih kategorija",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/category/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"category",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsIklkIjozLCJpZGVudGl0eSI6ImFkbWluIiwiZXh0IjoxNjAwMjgxNzI0LjEzOCwiaXAiOiI6OjEiLCJ1YSI6IlBvc3RtYW5SdW50aW1lLzcuMjYuMyIsImlhdCI6MTU5OTA3MjEyNH0.efp29B2bsCT0hdMEr9-ENvZo8mOJDB0rAks5HpRoZDU",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "2561ea63-82b3-46c1-b048-8f98b92e2f01",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "33f326e4-d21d-43b5-b3cf-ecb012197cac",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Cart and Order",
+			"item": [
+				{
+					"name": "Detalji trenutne korpe",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"articleId\": 1,\r\n    \"quantity\" : 1\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/user/cart/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user",
+								"cart",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Detalji trenutne korpe - vraca ali iz nekog razloga ne prepoznaje rute",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/api/user/cart/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"user",
+										"cart",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "75"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4b-/r4RtnwGHTT0qr9kK+nfSu7LYjo\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 02 Sep 2020 21:55:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"cartId\": 14,\n    \"createdAt\": null,\n    \"userId\": null,\n    \"cartArticle\": null,\n    \"user\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Change article quantity in the current cart",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"articleId\" : 2,\r\n\"quantity\" : 3\r\n\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/user/cart/addToCart/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user",
+								"cart",
+								"addToCart",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Make an order for the current cart",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/user/cart/makeOrder/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user",
+								"cart",
+								"makeOrder",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Make an order for the current cart  - napravljena porudzbina",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/user/cart/makeOrder/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"user",
+										"cart",
+										"makeOrder",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "95"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5f-OpAuif1bY25Ro0B030lSgvC8pcg\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 02 Sep 2020 22:35:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"error\",\n    \"statusCode\": -7001,\n    \"message\": \"An order for this cart has already been made.\"\n}"
+						},
+						{
+							"name": "Make an order for the current cart - empty cart",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/user/cart/makeOrder/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"user",
+										"cart",
+										"makeOrder",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "69"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"45-tHSkaTlNtkpiRWHwltz+k4dhKA0\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 02 Sep 2020 22:38:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"error\",\n    \"statusCode\": -7003,\n    \"message\": \"This cart is empty.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get order info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/order/1/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"order",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change order status",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Transfer-Encoding",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"newStatus\" : \"rejected\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/order/2/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"order",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidXNlciIsIklkIjo2LCJpZGVudGl0eSI6InRlc3RAdGVzdDMuY29tIiwiZXh0IjoxNjAwMjkwNjA3LjgyMywiaXAiOiI6OjEiLCJ1YSI6IlBvc3RtYW5SdW50aW1lLzcuMjYuMyIsImlhdCI6MTU5OTA4MTAwN30.07Gpm9S0bUwTNviMkJfP0sDpcUkmizxTI6KHc7s0hO4",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c6e03a98-ce59-4ef6-9eb7-dabf229fc4db",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "40f2a7b7-e0d6-46c2-991f-cbb0eb6b833a",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW5pc3RyYXRvciIsIklkIjoxLCJpZGVudGl0eSI6InRlc3QxMjMiLCJleHQiOjE2MDAyOTk2NjUuOTIzLCJpcCI6Ijo6MSIsInVhIjoiUG9zdG1hblJ1bnRpbWUvNy4yNi4zIiwiaWF0IjoxNTk5MDkwMDY1fQ.kkpsc4Xl99I2BS-CAa_Xnx_hOdRmyzaq-NQxkyfxQcc",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "cccf3b29-3a14-4519-8656-e6a56a19e3f6",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "6081e36c-b2df-4bf8-8768-bdb704861ea8",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
