@@ -28,7 +28,9 @@ import { UserService } from './services/user/user.service';
 import { CartService } from './services/cart/cart.service';
 import { UserCartController } from './controllers/api/user.cart.controller';
 import { OrderService } from './services/order/order.service';
-
+import { MailerModule } from '@nestjs-modules/mailer';
+import { MailConfig } from 'config/mail.config';
+import { OrderMailerService } from './services/order/order.mailer.service';
 
 
 
@@ -64,17 +66,26 @@ import { OrderService } from './services/order/order.service';
     }),
     TypeOrmModule.forFeature([
       Administrator,
-        ArticleColor,
-        Article,
-        ArticlePrice,
-        ArticleSize,
-        CartArticle,
-        Cart,
-        Category,
-        Order,
-        Photo,
-        User,
-        ArticleFeature,])
+      ArticleColor,
+      Article,
+      ArticlePrice,
+      ArticleSize,
+      CartArticle,
+      Cart,
+      Category,
+      Order,
+      Photo,
+      User,
+      ArticleFeature,]),
+    MailerModule.forRoot({
+      transport: 'smtps://' + MailConfig.username + ':'
+        + MailConfig.password + '@'
+        + MailConfig.hostname,
+
+      defaults:{
+        from: MailConfig.senderEmail,
+      }
+    }),
 
 
   ],
@@ -92,7 +103,8 @@ import { OrderService } from './services/order/order.service';
     PhotoService,
     UserService,
     CartService,
-    OrderService
+    OrderService,
+    OrderMailerService
   ],
 
   exports: [

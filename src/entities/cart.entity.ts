@@ -30,7 +30,7 @@ export class Cart {
   user: User;
 
   @OneToOne(() => CartArticle, (cartArticle) => cartArticle.cart)
-  cartArticle: CartArticle;
+  cartArticle: CartArticle[];
 
   @OneToOne(() => Order, (order) => order.cart)
   order: Order;
