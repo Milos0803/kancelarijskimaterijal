@@ -4,29 +4,34 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
+DROP DATABASE IF EXISTS `aplikacija`;
 CREATE DATABASE IF NOT EXISTS `aplikacija` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `aplikacija`;
 
+DROP TABLE IF EXISTS `administrator`;
 CREATE TABLE IF NOT EXISTS `administrator` (
   `administrator_id` int unsigned NOT NULL AUTO_INCREMENT,
-  `username` varchar(32) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
-  `password_hash` varchar(128) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `username` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `password_hash` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
   PRIMARY KEY (`administrator_id`),
   UNIQUE KEY `uq_administrator_username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 DELETE FROM `administrator`;
 /*!40000 ALTER TABLE `administrator` DISABLE KEYS */;
 INSERT INTO `administrator` (`administrator_id`, `username`, `password_hash`) VALUES
-	(1, 'test123', 'CF835DE3D4EA01367C45E412E7A9393A85A4E40AF149ED8C3ED6C37C05B67B27813D7FF8072C1035CEDD19415ADF17128D63186F05F0D656002B0CA1C34F44A0');
+	(1, 'test123', 'CF835DE3D4EA01367C45E412E7A9393A85A4E40AF149ED8C3ED6C37C05B67B27813D7FF8072C1035CEDD19415ADF17128D63186F05F0D656002B0CA1C34F44A0'),
+	(3, 'milostest030', 'ED3CF47DA273BC3DAF807AFFAA0553C266800F71B25C9D97FBD3962F9784E690ABBCEB89B25B74A922944DF78757B3BB3E6FC61FB766F33A1A4B5B6B30025D3F'),
+	(4, 'administrator', 'CF835DE3D4EA01367C45E412E7A9393A85A4E40AF149ED8C3ED6C37C05B67B27813D7FF8072C1035CEDD19415ADF17128D63186F05F0D656002B0CA1C34F44A0');
 /*!40000 ALTER TABLE `administrator` ENABLE KEYS */;
 
+DROP TABLE IF EXISTS `article`;
 CREATE TABLE IF NOT EXISTS `article` (
   `article_id` int unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(128) COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `category_id` int unsigned NOT NULL,
-  `excerpt` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `description` text COLLATE utf8mb4_general_ci NOT NULL,
+  `excerpt` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`article_id`),
   UNIQUE KEY `uq_article_name_category_id` (`name`,`category_id`) USING BTREE,
@@ -42,11 +47,10 @@ INSERT INTO `article` (`article_id`, `name`, `category_id`, `excerpt`, `descript
 	(4, 'Kovertica plave boje 23mm', 2, 'Kratak opis opisa opis', 'Opis proizvoda!', '2020-08-30 18:59:10'),
 	(5, 'Proba artikla koverta plava', 2, 'Kratak opis opisa opis', 'Opis proizvoda!', '2020-08-30 18:59:10'),
 	(7, 'Proba artikla koverta plava 2', 2, 'Kratak opis opisa opis', 'Opis proizvoda!', '2020-08-30 18:59:10'),
-	(8, 'Proba artikla koverta plava 22', 2, 'Kratak opis opisa opis', 'Opis proizvoda!', '2020-08-30 18:59:10'),
-	(10, 'Probaaa artikla koverta plava 22', 2, 'Kratak opis opisa opis', 'Opis proizvoda!', NULL),
-	(11, 'Kovertica', 1, 'Kratak opis opisa opis', 'Opis proizvoda!', NULL);
+	(8, 'Proba artikla koverta plava 22', 2, 'Kratak opis opisa opis', 'Opis proizvoda!', '2020-08-30 18:59:10');
 /*!40000 ALTER TABLE `article` ENABLE KEYS */;
 
+DROP TABLE IF EXISTS `article_color`;
 CREATE TABLE IF NOT EXISTS `article_color` (
   `article_color_id` int unsigned NOT NULL AUTO_INCREMENT,
   `color` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
@@ -61,6 +65,7 @@ DELETE FROM `article_color`;
 /*!40000 ALTER TABLE `article_color` DISABLE KEYS */;
 /*!40000 ALTER TABLE `article_color` ENABLE KEYS */;
 
+DROP TABLE IF EXISTS `article_feature`;
 CREATE TABLE IF NOT EXISTS `article_feature` (
   `feature_id` int unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
@@ -75,6 +80,7 @@ DELETE FROM `article_feature`;
 /*!40000 ALTER TABLE `article_feature` DISABLE KEYS */;
 /*!40000 ALTER TABLE `article_feature` ENABLE KEYS */;
 
+DROP TABLE IF EXISTS `article_price`;
 CREATE TABLE IF NOT EXISTS `article_price` (
   `article_price_id` int unsigned NOT NULL AUTO_INCREMENT,
   `article_id` int unsigned NOT NULL,
@@ -90,12 +96,10 @@ DELETE FROM `article_price`;
 /*!40000 ALTER TABLE `article_price` DISABLE KEYS */;
 INSERT INTO `article_price` (`article_price_id`, `article_id`, `price`, `created_at`) VALUES
 	(1, 4, 33, '2020-09-01 20:33:04'),
-	(2, 1, 25, '2020-09-01 20:33:21'),
-	(3, 4, NULL, NULL),
-	(4, 4, NULL, NULL),
-	(5, 4, NULL, NULL);
+	(2, 1, 25, '2020-09-01 20:33:21');
 /*!40000 ALTER TABLE `article_price` ENABLE KEYS */;
 
+DROP TABLE IF EXISTS `article_size`;
 CREATE TABLE IF NOT EXISTS `article_size` (
   `article_size_id` int unsigned NOT NULL AUTO_INCREMENT,
   `size` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
@@ -114,6 +118,7 @@ INSERT INTO `article_size` (`article_size_id`, `size`, `article_id`) VALUES
 	(4, '1,5mx2m', 1);
 /*!40000 ALTER TABLE `article_size` ENABLE KEYS */;
 
+DROP TABLE IF EXISTS `cart`;
 CREATE TABLE IF NOT EXISTS `cart` (
   `cart_id` int unsigned NOT NULL AUTO_INCREMENT,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -125,37 +130,9 @@ CREATE TABLE IF NOT EXISTS `cart` (
 
 DELETE FROM `cart`;
 /*!40000 ALTER TABLE `cart` DISABLE KEYS */;
-INSERT INTO `cart` (`cart_id`, `created_at`, `user_id`) VALUES
-	(1, NULL, NULL),
-	(2, NULL, NULL),
-	(3, NULL, NULL),
-	(4, NULL, NULL),
-	(5, NULL, NULL),
-	(6, NULL, NULL),
-	(7, NULL, NULL),
-	(8, NULL, NULL),
-	(9, NULL, NULL),
-	(10, NULL, NULL),
-	(11, NULL, NULL),
-	(12, NULL, NULL),
-	(13, NULL, NULL),
-	(14, NULL, NULL),
-	(15, NULL, NULL),
-	(16, NULL, NULL),
-	(17, NULL, NULL),
-	(18, NULL, NULL),
-	(19, NULL, NULL),
-	(20, NULL, NULL),
-	(21, NULL, NULL),
-	(22, NULL, NULL),
-	(23, NULL, NULL),
-	(24, NULL, NULL),
-	(25, NULL, NULL),
-	(26, NULL, NULL),
-	(27, NULL, NULL),
-	(28, NULL, NULL);
 /*!40000 ALTER TABLE `cart` ENABLE KEYS */;
 
+DROP TABLE IF EXISTS `cart_article`;
 CREATE TABLE IF NOT EXISTS `cart_article` (
   `cart_article_id` int unsigned NOT NULL AUTO_INCREMENT,
   `cart_id` int unsigned NOT NULL,
@@ -172,11 +149,9 @@ CREATE TABLE IF NOT EXISTS `cart_article` (
 
 DELETE FROM `cart_article`;
 /*!40000 ALTER TABLE `cart_article` DISABLE KEYS */;
-INSERT INTO `cart_article` (`cart_article_id`, `cart_id`, `article_id`, `quantity`) VALUES
-	(1, 2, 1, 2),
-	(3, 25, 2, 3);
 /*!40000 ALTER TABLE `cart_article` ENABLE KEYS */;
 
+DROP TABLE IF EXISTS `category`;
 CREATE TABLE IF NOT EXISTS `category` (
   `category_id` int unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
@@ -197,6 +172,7 @@ INSERT INTO `category` (`category_id`, `name`) VALUES
 	(3, 'Stolovi');
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 
+DROP TABLE IF EXISTS `order`;
 CREATE TABLE IF NOT EXISTS `order` (
   `order_id` int unsigned NOT NULL AUTO_INCREMENT,
   `cart_id` int unsigned NOT NULL,
@@ -209,11 +185,9 @@ CREATE TABLE IF NOT EXISTS `order` (
 
 DELETE FROM `order`;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
-INSERT INTO `order` (`order_id`, `cart_id`, `status`, `created_at`) VALUES
-	(1, 1, 'pending', '2020-09-03 10:29:37'),
-	(2, 3, 'rejected', '2020-09-03 10:29:54');
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 
+DROP TABLE IF EXISTS `photo`;
 CREATE TABLE IF NOT EXISTS `photo` (
   `photo_id` int unsigned NOT NULL AUTO_INCREMENT,
   `article_id` int unsigned NOT NULL,
@@ -230,6 +204,7 @@ INSERT INTO `photo` (`photo_id`, `article_id`, `image_path`) VALUES
 	(2, 2, '202091-5733727885-baza');
 /*!40000 ALTER TABLE `photo` ENABLE KEYS */;
 
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `user_id` int unsigned NOT NULL AUTO_INCREMENT,
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
@@ -247,11 +222,12 @@ INSERT INTO `user` (`user_id`, `email`, `password_hash`, `forename`, `surname`, 
 	(6, 'test@test3.com', 'D65534E6F152D0CF0E16325F5EF17A890F887106C5EEF8838928A16977357B6625DFCD35B167DD49152E1074CC36FBCEA9B2A05E867D549BD6B159DCBB954672', 'Milos', 'Stefanovic', '9.oktobar 3');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
+DROP TABLE IF EXISTS `user_token`;
 CREATE TABLE IF NOT EXISTS `user_token` (
   `user_token_id` int unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int unsigned NOT NULL,
   `created_at` timestamp NOT NULL,
-  `token` text COLLATE utf8mb4_general_ci NOT NULL,
+  `token` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `expires_at` datetime NOT NULL,
   `is_valid` tinyint unsigned NOT NULL,
   PRIMARY KEY (`user_token_id`),

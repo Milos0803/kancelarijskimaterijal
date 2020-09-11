@@ -1,9 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { Order } from "src/entities/order.entity";
-
 import { MailConfig } from "config/mail.config";
 import { MailerService } from "@nestjs-modules/mailer";
-import { CartArticle } from "src/entities/cart.article.entyty";
+
 
 @Injectable()
 export class OrderMailerService {
