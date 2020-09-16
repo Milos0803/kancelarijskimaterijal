@@ -1,5 +1,5 @@
 export class JwtDataDto{
-    role: "administrator" | "user";
+    role: "administrator";
     id: number;
     identity: string;
     exp: number ;
