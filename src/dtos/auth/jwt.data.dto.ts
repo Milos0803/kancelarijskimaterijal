@@ -1,5 +1,7 @@
+import { User } from "src/entities/user.entity";
+
 export class JwtDataDto{
-    role: "administrator";
+    role: "administrator" | "user";
     id: number;
     identity: string;
     exp: number ;

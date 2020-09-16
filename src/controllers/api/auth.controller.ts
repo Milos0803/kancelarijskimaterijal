@@ -80,6 +80,27 @@ export class AuthController {
         if (user.passwordHash !== passwordHashString) {
             return new Promise(resolve => resolve(new ApiResponse('error', -3002)));
         }
+        const jwtData = new JwtDataDto();
+        jwtData.role = "user";
+        jwtData.id = user.userId;
+        jwtData.identity = user.email;
+
+        jwtData.exp = this.getDatePlus(60 * 60 * 24 * 14);
+
+        jwtData.ip = req.ip.toString();
+        jwtData.ua = req.headers["user-agent"];
+
+        let token: string = jwt.sign(jwtData.toPlainObject(), jwtSecret);
+
+        const responseObject = new LoginInfoDto(
+            user.userId,
+            user.email,
+            token,
+            "",
+            "",
+        );
+
+        return new Promise(resolve => resolve(responseObject));
 
       
 

@@ -11,7 +11,7 @@ export class LoginUserDto {
     email: string;
 
     @Validator.IsNotEmpty()
-    @Validator.IsHash('sha512')
+  
   
     password: string;
 
