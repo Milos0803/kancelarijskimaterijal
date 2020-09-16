@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { TypeOrmCrudService } from "@nestjsx/crud-typeorm"
 import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
+import { In, Repository } from "typeorm";
 import { Article } from "src/entities/article.entity";
 import { AddArticleDto } from "src/dtos/article/add.article.dto";
 import { ApiResponse } from "src/misc/api.response.class";
@@ -131,11 +131,11 @@ export class ArticleService extends TypeOrmCrudService<Article>{
 
     }
 
-    async search(data: ArticleSearchDto): Promise<Article[]> {
+    async search(data: ArticleSearchDto): Promise<Article[] | ApiResponse> {
 
         const builder = await this.article.createQueryBuilder("article");
 
-        builder.leftJoinAndSelect("article.articlePrices" ,"ap", "ap.article_id = article.article_id");
+        builder.innerJoinAndSelect("article.articlePrices" ,"ap", "ap.article_id = article.article_id");
 
         builder.where('article.categoryId= :catId', {catId: data.categoryId });
 
@@ -182,7 +182,22 @@ export class ArticleService extends TypeOrmCrudService<Article>{
         builder.skip(page * perPage);
         builder.take(perPage);
 
-        return await builder.getMany();
-    }
 
+        let articleIds = await (await builder.getMany()).map(article => article.articleId);
+
+        if (articleIds.length === 0) {
+            return new ApiResponse("ok", 0, "No articles found for these search parameters.");
+        }
+
+        return await this.article.find({
+            where: { articleId: In(articleIds) },
+            relations: [
+                "category",
+                "articleFeatures",
+                "features",
+                "articlePrices",
+                "photos"
+            ]
+        });
+    }
 }
