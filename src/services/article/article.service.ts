@@ -135,23 +135,19 @@ export class ArticleService extends TypeOrmCrudService<Article>{
 
         const builder = await this.article.createQueryBuilder("article");
 
-        builder.innerJoin("article.articlePrices" ,"ap", "ap.createdAt = (SELECT MAX ( ap.created_At )FROM article_price AS ap WHERE ap.articleId = article.article_Id ORDER BY ap.created_At) ");
+        builder.leftJoinAndSelect("article.articlePrices" ,"ap", "ap.article_id = article.article_id");
 
-        builder.where('article.categoryId= :catId', {catId: data.categoryId});
-   
-        if(data.keyword&& data.keyword.length>0){
-           
-           
+        builder.where('article.categoryId= :catId', {catId: data.categoryId });
+
+        if(data.keyword && data.keyword.length > 0){
             builder.andWhere('(article.name LIKE :kw OR article.excerpt LIKE :kw OR article.description LIKE :kw)' ,{kw: '%'+ data.keyword.trim() + '%'});
-        
-        
         }
 
         if(data.priceMin &&  typeof data.priceMin === 'number'){
-            builder.andWhere('ap.price>= :min', {min:data.priceMin});
+            //builder.andWhere('ap.price >= :min', {min:data.priceMin});
         }
         if(data.priceMax && typeof data.priceMax === 'number'){
-            builder.andWhere('ap.price<= :max', {max:data.priceMax});
+            //builder.andWhere('ap.price <= :max', {max:data.priceMax});
         }
 
         let orderBy = 'article.name';
@@ -176,7 +172,7 @@ export class ArticleService extends TypeOrmCrudService<Article>{
         let page = 0 ;
         let perPage: 5 | 10 | 25 | 50 = 25;
         if(data.page && typeof data.page === 'number'){
-            page =data.page;
+            page = data.page - 1;
         }
 
         if(data.itemsPerPage && typeof data.itemsPerPage ==='number'){
@@ -185,11 +181,8 @@ export class ArticleService extends TypeOrmCrudService<Article>{
 
         builder.skip(page * perPage);
         builder.take(perPage);
-        let items = await builder.getMany();
 
-        return items ;
+        return await builder.getMany();
     }
 
 }
-
-

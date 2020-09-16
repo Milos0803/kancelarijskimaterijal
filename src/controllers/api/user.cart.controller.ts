@@ -20,7 +20,7 @@ export class UserCartController {
         private orderMailer: OrderMailerService) { }
 private async getActiveCartByUserId(userId:number):
 Promise<Cart>{
-  
+
     let cart =  await this.cartService.getLastCartActiveCartByUserId(userId);
 
     if(!cart) {
@@ -30,26 +30,26 @@ Promise<Cart>{
 }
     @Get()
     @UseGuards(RoleCheckerGuard)
-    @AllowToRoles('user' )
+    @AllowToRoles('user', "guest")
     async getCurrentCart(@Req() req: Request): Promise<Cart> {
        return await this.getActiveCartByUserId(req.token.id);
-    } 
+    }
 
     @Post('addToCart')
     @UseGuards(RoleCheckerGuard)
-    @AllowToRoles('user' )
+    @AllowToRoles('user', "guest")
 
     async addToCart(@Body()data: AddArticleToCartDto,@Req() req: Request): Promise<Cart>{
         const cart =await this.getActiveCartByUserId(req.token.id);
 
        return await this.cartService.addArticleToCart(cart.cartId,data.articleId,data.quantity);
 
-     
+
     }
 
     @Patch()
     @UseGuards(RoleCheckerGuard)
-    @AllowToRoles('user' )
+    @AllowToRoles('user', "guest")
     async changeQuantity(@Body() data: EditArticleInCartDto, @Req() req: Request): Promise<Cart>{
         const cart =await this.getActiveCartByUserId(req.token.id);
         return await this.cartService.changeQuantity(cart.cartId,data.articleId,data.quantity);
@@ -57,7 +57,7 @@ Promise<Cart>{
 
     @Post('makeOrder')
     @UseGuards(RoleCheckerGuard)
-    @AllowToRoles('user' )
+    @AllowToRoles('user', "guest")
 
     async makeOrder( @Req() req: Request): Promise<Order | ApiResponse> {
         const cart =await this.getActiveCartByUserId(req.token.id);

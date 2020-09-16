@@ -53,14 +53,14 @@ import { RoleCheckerGuard } from "src/misc/role.checker.guard";
       getManyBase: {
         decorators:[
         UseGuards(RoleCheckerGuard),
-        AllowToRoles('administrator', 'user'),
+        AllowToRoles('administrator', 'user', 'guest'),
       ],
 
       },
       getOneBase: {
         decorators:[
             UseGuards(RoleCheckerGuard),
-            AllowToRoles('administrator', 'user'),
+            AllowToRoles('administrator', 'user', 'guest'),
           ],
       },
       updateOneBase:{
@@ -70,7 +70,7 @@ import { RoleCheckerGuard } from "src/misc/role.checker.guard";
         ],
       },
 
-     
+
 
     },
 })

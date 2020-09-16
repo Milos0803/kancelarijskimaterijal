@@ -15,37 +15,47 @@ export class AuthMiddleware implements NestMiddleware {
                 public userService: UserService,
         ) { }
     async use(req: Request, res: Response, next: NextFunction) {
+        let jwtData: any;
+        let token : string;
 
-        if (!req.headers.authorization) {
+        if(!req.headers.authorization) {
             throw new HttpException('Token not found', HttpStatus.UNAUTHORIZED);
-
         }
 
-        const token = req.headers.authorization;
+        token = req.headers.authorization;
+
         const tokenParts = token.split(' ');
 
         if (tokenParts.length !== 2) {
             throw new HttpException('Bad token found', HttpStatus.UNAUTHORIZED);
         }
         const tokenString = tokenParts[1];
-
-
-        let jwtData: any;
-        try{
-            jwtData = jwt.verify(tokenString, jwtSecret);
-        } catch (e){
-            throw new HttpException('Token not found', HttpStatus.UNAUTHORIZED);
+        if (tokenString && tokenString !== "null") {
+            try{
+                jwtData = jwt.verify(tokenString, jwtSecret);
+            } catch (e){
+                throw new HttpException('Token not found1', HttpStatus.UNAUTHORIZED);
+            }
+        } else {
+            jwtData = new JwtDataDto();
+            jwtData.role = "guest";
+            jwtData.id = 0;
+            jwtData.identity = "guest";
+            jwtData.exp = (new Date().getTime() / 1000 + (60 * 60 * 24 * 14));
+            jwtData.ip = req.ip.toString();
+            jwtData.ua = req.headers["user-agent"];
+            token = jwt.sign(jwtData.toPlainObject(), jwtSecret);
         }
 
         if (!jwtData) {
-            throw new HttpException('Token not found', HttpStatus.UNAUTHORIZED);
+            throw new HttpException('Token not found2', HttpStatus.UNAUTHORIZED);
         }
 
         if (jwtData.ip !== req.ip.toString()) {
-            throw new HttpException('Token not found', HttpStatus.UNAUTHORIZED);
+            throw new HttpException('Token not found3', HttpStatus.UNAUTHORIZED);
         }
         if (jwtData.ua !== req.headers["user-agent"]) {
-            throw new HttpException('Token not found', HttpStatus.UNAUTHORIZED);
+            throw new HttpException('Token not found4', HttpStatus.UNAUTHORIZED);
         }
 
         if(jwtData.role === "administrator"){
@@ -68,7 +78,9 @@ export class AuthMiddleware implements NestMiddleware {
 
             req.token = jwtData;
             next();
-    }
+        } else if(jwtData.role === "guest"){
+            next();
+        }
 
 
 }

@@ -47,27 +47,27 @@ import { ArticleSearchDto } from "src/dtos/article/article.search.dto";
     },
     routes: {
         only: [
-           
+
             "getManyBase",
-            "getOneBase" ,    
+            "getOneBase" ,
         ],
 
         getManyBase: {
           decorators:[
           UseGuards(RoleCheckerGuard),
-          AllowToRoles('administrator', 'user'),
+          AllowToRoles('administrator', 'user', "guest"),
         ],
-  
+
         },
         getOneBase: {
           decorators:[
               UseGuards(RoleCheckerGuard),
-              AllowToRoles('administrator', 'user'),
+              AllowToRoles('administrator', 'user', "guest"),
             ],
         },
 
       },
-    
+
 })
 
 export class ArticleController {
@@ -242,9 +242,9 @@ export class ArticleController {
 
     @Post('search')
     @UseGuards(RoleCheckerGuard)
-    @AllowToRoles('administrator', 'user')
-   async search(@Body() data: ArticleSearchDto) :Promise<Article[]> {
-        return await this.service.search(data);
+    @AllowToRoles('administrator', 'user', 'guest')
+    async search(@Body() data: ArticleSearchDto) : Promise<ApiResponse | Article[]> {
+        return this.service.search(data);
     }
 
 }

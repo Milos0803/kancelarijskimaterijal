@@ -13,11 +13,11 @@ export class RoleCheckerGuard implements CanActivate {
     canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
 
         const req: any = context.switchToHttp().getRequest();
-       const role =  req.token.role;
+       const role =  req.token ? req.token.role : "guest";
 
         const allowedToRoles = this
             .reflector.
-            get<("administrator" | "user")[]>('allow_to_roles', context.getHandler());
+            get<("administrator" | "user" | "guest")[]>('allow_to_roles', context.getHandler());
         if(!allowedToRoles.includes(role)){
             return false ;
         }
